@@ -34,6 +34,7 @@ function fetch_home(){
 		});
 		if ($("#scratches").html() != html){
 			$("#scratches").prepend(html);
+			latest = parseInt($(".scratch").eq(0).data("index"));
 		}
 	});
 }
