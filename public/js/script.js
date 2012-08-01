@@ -1,3 +1,4 @@
+var latest = 0;
 function fetch_home(){
 	$.getJSON("/home.json", function(data){
 		var users = data[0];
@@ -22,14 +23,17 @@ function fetch_home(){
 			var user = $(users).filter(function(i){
 				return this.id == el.user_id;
 			})[0];
-			html += '<div class="scratch">';
+			latest = Math.max(el.id, latest);
+			html += '<div class="scratch" data-index="' + el.id + '">';
 			html += '<p>'+el.mtext+ '<span class="posted_by floatright">' + user.username + '</span>' + '</p>';
 			html += (el.clly) ? el.clly : "";
 			html += (el.jsfiddle) ? el.jsfiddle : "";
 			html += '</div>';
 		});
 		if ($("#scratches").html() != html){
-			$("#scratches").html(html);
+			if (latest > $(".scratch").eq(0).data("index")){
+				$("#scratches").html(html);
+			}
 		}
 	});
 }
