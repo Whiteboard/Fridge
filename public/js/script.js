@@ -20,6 +20,7 @@ function fetch_home(){
 		}
 		var html = "";
 		$(scratches).each(function(i,el){
+			console.log(el);
 			if (el.id > latest) {
 				var user = $(users).filter(function(i){
 					return this.id == el.user_id;
