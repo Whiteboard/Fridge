@@ -562,6 +562,7 @@ h1 {
   border-radius: 4px;
   padding: 12px;
   display: block;
+  float: left;
   width: 40%;
   margin: 5%;
   text-align: center;
