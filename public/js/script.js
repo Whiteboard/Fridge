@@ -20,19 +20,20 @@ function fetch_home(){
 		}
 		var html = "";
 		$(scratches).each(function(i,el){
-			var user = $(users).filter(function(i){
-				return this.id == el.user_id;
-			})[0];
-			latest = Math.max(el.id, latest);
-			html += '<div class="scratch" data-index="' + el.id + '">';
-			html += '<p>'+el.mtext+ '<span class="posted_by floatright">' + user.username + '</span>' + '</p>';
-			html += (el.clly) ? el.clly : "";
-			html += (el.jsfiddle) ? el.jsfiddle : "";
-			html += '</div>';
+			if (el.id > latest) {
+				var user = $(users).filter(function(i){
+					return this.id == el.user_id;
+				})[0];
+				html += '<div class="scratch" data-index="' + el.id + '">';
+				html += '<p>'+el.mtext+ '<span class="posted_by floatright">' + user.username + '</span>' + '</p>';
+				html += (el.clly) ? el.clly : "";
+				html += (el.jsfiddle) ? el.jsfiddle : "";
+				html += '</div>';
+			}
 		});
 		if ($("#scratches").html() != html){
 			if (latest > $(".scratch").eq(0).data("index")){
-				$("#scratches").html(html);
+				$("#scratches").prepend(html);
 			}
 		}
 	});
