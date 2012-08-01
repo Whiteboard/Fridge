@@ -33,9 +33,7 @@ function fetch_home(){
 			}
 		});
 		if ($("#scratches").html() != html){
-			if (latest > $(".scratch").eq(0).data("index")){
-				$("#scratches").prepend(html);
-			}
+			$("#scratches").prepend(html);
 		}
 	});
 }
