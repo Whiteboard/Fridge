@@ -51,7 +51,9 @@ $("#forms form").on("submit", function(e){
 	var originalval = $(this).val();
 	$(this).val("");
 	$(this).on("blur", function(){
-		$(this).val(originalval);
+		if ($(this).val() == ""){
+			$(this).val(originalval);
+		}
 	});
 })
 
