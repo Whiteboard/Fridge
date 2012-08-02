@@ -555,8 +555,8 @@ h1 {
   padding: 4px;
   display: block;
   text-align: center;
-  max-width: 120px;
-  max-height: 200px;
+  width: 120px;
+  height: 300px;
 }
 .scratch .posted_by img {
   max-width: 70px;

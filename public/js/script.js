@@ -37,10 +37,10 @@ function fetch_home(){
 				})[0];
 				shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
-				shtml += '<p>'+el.mtext+ '</p><br><small><i>'+$.relativeTime(el.created_at)+'</i></small>';
+				shtml += '<p>'+el.mtext+ '</p>';
 				shtml += (el.clly) ? el.clly : "";
 				shtml += (el.jsfiddle) ? el.jsfiddle : "";
-				shtml += '</div>';
+				shtml += '<br><small><i>'+$.relativeTime(el.created_at)+'</i></small></div>';
 			}
 		});
 		if ($("#scratches").html() != shtml){
