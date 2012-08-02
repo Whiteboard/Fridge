@@ -623,6 +623,7 @@ h1 {
   display: block;
   float: left;
   width: 100%;
+  min-width: 440px;
   position: relative;
   text-decoration: none;
   height: 110px;
@@ -683,6 +684,8 @@ h1 {
 }
 #users .meta {
   float: left;
+  width: 70%;
+  max-width: 340px;
 }
 #users p {
   
