@@ -565,9 +565,14 @@ textarea:focus {
   padding: 12px;
 }
 .scratch {
-  border-bottom: 1px solid #efefef;
-  padding: 20px 0;
+  padding: 20px 0 0;
   position: relative;
+  margin-bottom: 20px;
+}
+.scratch h5 {
+  margin: 0;
+  padding: 6px 12px;
+  background: ;
 }
 .scratch.focus {
   background-color: #ffdcc2;
@@ -585,7 +590,7 @@ textarea:focus {
   padding: 3px;
 }
 .scratch.location {
-  background-color: #fffac4;
+  background-color: #fff0e4;
 }
 .scratch.location:before {
   position: absolute;
@@ -742,7 +747,7 @@ form.submitting textarea {
   width: 100%;
   padding: 12px;
   background: #f4f0fb;
-  border-bottom: 1px solid #e8dcfc;
+  border-top: 1px solid #e8dcfc;
 }
 .thought p {
   margin: 3px 0;
@@ -759,11 +764,10 @@ form.submitting textarea {
   float: left;
 }
 .thought_link {
-  margin: 3px 0;
+  margin: 0;
   padding: 12px;
   display: block;
-  background: #e8dcfc;
-  /*border-bottom: 1px solid #e8dcfc;*/
+  background: #FBF4FF;
 }
 .thought_form {
   display: none;
