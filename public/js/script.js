@@ -80,6 +80,11 @@ function fetch_home(){
 			console.log(nhtml);
 			$("#notifications").html(nhtml);
 		}
+		if (notifications.length > 0){
+			$("title").val("(" + notifications.length + ")");
+		} else {
+			$("title").val("The Fridge");
+		}
 	});
 }
 fetch_home();

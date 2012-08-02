@@ -705,7 +705,7 @@ textarea:focus {
 }
 
 .tweet {
-  margin-bottom: 12px;
+  border-bottom: 1px solid #c2e3ec;
   padding: 6px;
   background-color: #e2f9ff;
 }
@@ -717,6 +717,7 @@ textarea:focus {
 .notification {
   padding: 12px;
   background: #efefef;
+  border-bottom: 1px solid #ddd;
 }
 .notification p {
   margin: 0;
