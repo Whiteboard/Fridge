@@ -100,6 +100,7 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 
 
 $("body").on("focus", "textarea", function(){
+	console.log("focus fix");
 	$(this).on("keydown", function(e){
 		if (e.keyCode == 13){
 			e.preventDefault();
@@ -107,7 +108,7 @@ $("body").on("focus", "textarea", function(){
 		}
 	});
 }).on("blur", "textarea", function(){
-	$(this).off("keyup");
+	$(this).off("keydown");
 });
 
 
@@ -140,7 +141,7 @@ function buildtweets(data){
 	}
 }
 $("#scratchboard h4 span").on("click", function(){
-	$("#scratchboard textarea").focus();
+	$("#scratchboard textarea").blur().focus();
 	var curval = $("#scratchboard textarea").val()
 	$("#scratchboard textarea").val($(this).text() + " " + curval);
 });
