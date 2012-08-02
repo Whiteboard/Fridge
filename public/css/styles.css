@@ -482,6 +482,7 @@ block {
 }
 body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   color: #444;
    font-weight: 300;
 }
 #container {
@@ -543,7 +544,7 @@ textarea {
   display: block;
   margin: 12px 0;
   width: 100%;
-  background: #dedede;
+  background: #fefefe;
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 12px;
@@ -575,6 +576,7 @@ textarea:focus {
   border-radius: 4px;
   position: relative;
   margin-bottom: 20px;
+  background: #fefefe;
 }
 .scratch h5 {
   margin: 0;
@@ -783,4 +785,40 @@ form.submitting textarea {
   background: #f0edf6;
 }
 
+.login {
+  background: url(/images/light_noise_diagonal.png);
+}
+.fridge {
+  background: url(/images/furley_bg.png);
+}
 
+.login form {
+  width: 300px;
+  margin: 0 auto;
+}
+.login input {
+  display: block;
+  background: #fff;
+  color: #666;
+  box-shadow: none;
+  padding: 6px 8px;
+  margin-bottom: 20px;
+  position: relative;
+  float: none;
+  width: 100%;
+}
+.login input[type=submit]:hover {
+  background: #343434;
+  color: #fefefe;
+}
+.login input:focus {
+  top: 0px;
+  left: 0px;
+}
+.login h1 {
+  text-align: center;
+}
+.flash {
+  padding: 12px;
+  background: #f8f0c8;
+  border-bottom: 1px solid #e0d395;

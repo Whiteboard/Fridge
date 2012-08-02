@@ -13,8 +13,10 @@ require './users_controller.rb'
 
 get "/" do
 	if logged_in?
+		@bodyclass = "fridge"
 		erb :fridge, :layout => :layout
 	else
+		@bodyclass = "login"
 		erb :'users/new', :layout => :layout
 	end
 end

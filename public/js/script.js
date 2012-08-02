@@ -1,4 +1,7 @@
 (function(jQuery, window, undefined){
+
+if ($("body").hasClass("fridge")){
+
 var latest_scratch = 0, latest_notification = 0;
 function fetch_home(){
 	twitter();
@@ -210,20 +213,21 @@ $("#scratchboard").on("click", ".thought_link", function(e){
 	$(this).hide().siblings("form").show().find("textarea").focus();
 });
 
-
-
+setTimeout(function(){
+	$(".flash").slideUp(function(){$(".flash").remove()});
+}, 3000);
 
 setInterval(fetch_home, 5000);
 
+$(document).on("keydown", function(e){
+	if ($(e.target).parents("form").length){
+		return;
+	}
+	if (e.keyCode == 83 ){
+		e.preventDefault();
+		$("#scratchboard form").first().find("textarea").blur().focus();
+	}
+});
 
-
-
-
-
-
-
-
-
-
-
+} // ending body check
 }($, window));
