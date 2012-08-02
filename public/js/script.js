@@ -2,6 +2,9 @@ var latest_scratch = 0, latest_notification = 0;
 function fetch_home(){
 	twitter();
 	$.getJSON("/home.json", function(data){
+		$(".relativeTime").each(function(){
+			$(this).html($.relativeTime($(this).data("date")));
+		});
 		var users = data[0],
 			scratches = data[1],
 			notifications = data[2],
@@ -47,7 +50,7 @@ function fetch_home(){
 				shtml += '<p>'+el.mtext+ '</p>';
 				shtml += (el.clly) ? el.clly : "";
 				shtml += (el.jsfiddle) ? el.jsfiddle : "";
-				shtml += '<br><small><i>'+$.relativeTime(el.created_at)+'</i></small></div></div>';
+				shtml += '<br><small><i class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</i></small></div></div>';
 				shtml += '<h5>Thoughts:</h5><div class="thoughts clearfix" id="thoughts-for-'+ el.id +'">';
 				shtml += '</div>'
 				shtml += '<a href="#" class="thought_link">Post a thought</a>';
@@ -147,7 +150,7 @@ function buildtweets(data){
 	$(data.results).each(function(i,el){
 		h += '<div class="tweet"><a class="from_user" href="http://twitter.com/'+el.from_user+'">'+el.from_user+"</a>";
 		h += '<p class="tweettext">'+el.text+"</p>";
-		h += '<small>'+$.relativeTime(el.created_at)+'</small>';
+		h += '<small class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</small>';
 		h += "</div>";
 	});
 	if ($("#twitter").html() != h){
