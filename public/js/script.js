@@ -155,7 +155,7 @@ function buildtweets(data){
 	}
 }
 $("#scratchboard h4 span").on("click", function(){
-	$("#scratchboard textarea").blur().focus();
+	$("#scratchboard textarea").first().blur().focus();
 	var curval = $("#scratchboard textarea").val()
 	$("#scratchboard textarea").val($(this).text() + " " + curval);
 });
