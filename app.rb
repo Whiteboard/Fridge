@@ -174,3 +174,13 @@ get "/usernames.json" do
 	@users = User.all(:username.like => "%" + params[:val] + "%")
 	@users.to_json(:only => [:username])
 end
+post "/scratch/:id/boom" do
+	headers["Content-Type"] = "application/json"
+	s = Scratch.get(params[:id])
+	s.boomcount = s.boomcount + 1
+	if s.save
+		{:status => "success", :entry => s}.to_json
+	else
+		{:status => "success", :entry => s}.to_json
+	end
+end

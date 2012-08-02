@@ -35,6 +35,7 @@ class Scratch
 	property :created_at, 	DateTime
 	property :clly,			String, :length => 350
 	property :jsfiddle,		String, :length => 350
+	property :boomcount,	Integer, :default => 0
 
 	has n, :thoughts
 	belongs_to :user

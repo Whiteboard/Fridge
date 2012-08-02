@@ -65,6 +65,8 @@ function fetch_home(){
 				shtml += '<textarea name="mtext">A thought...</textarea>';
 				shtml += '<input type="submit" value="post">';
 				shtml += '</form>';
+				// shtml += '<p class="boomcount">' + el.boomcount + "</p>";
+				// shtml += '<form action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += '</div>';
 			}
 		});
@@ -102,6 +104,7 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
 	var f = $(this);
 	$.post(f.attr("action"), f.serialize(), function(data){
+		console.log(data);
 		if (data.status == "success"){
 			fetch_home();
 			f.find("textarea").val("Success!");
