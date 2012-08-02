@@ -485,7 +485,7 @@ body {
    color: #444;
    font-weight: 300;
 }
-#container {
+.fridge #container {
   min-width: 1000px;
 }
 h1 {
