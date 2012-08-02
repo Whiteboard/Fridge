@@ -28,7 +28,6 @@ function fetch_home(){
 		if ($("#focus").html() != current_user.focus){
 			$("#focus").html(current_user.focus);
 		}
-
 		var shtml = "";
 		$(scratches).each(function(i,el){
 			if (el.id > latest_scratch) {
@@ -42,18 +41,28 @@ function fetch_home(){
 				} else {
 					shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
 				}
+				shtml += "<div class='clearfix'>";
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
 				shtml += '<div class="floatleft scratch_content">';
 				shtml += '<p>'+el.mtext+ '</p>';
 				shtml += (el.clly) ? el.clly : "";
 				shtml += (el.jsfiddle) ? el.jsfiddle : "";
 				shtml += '<br><small><i>'+$.relativeTime(el.created_at)+'</i></small></div></div>';
+				shtml += '<h5>Thoughts:</h5><div class="thoughts clearfix" id="thoughts-for-'+ el.id +'">';
+				shtml += '</div>'
+				shtml += '<a href="#" class="thought_link">Post a thought</a>';
+				shtml += '<form class="thought_form" action="/scratches/' + el.id + '/thoughts" method="POST">';
+				shtml += '<textarea name="mtext">A thought...</textarea>';
+				shtml += '<input type="submit" value="post">';
+				shtml += '</form>';
+				shtml += '</div>';
 			}
 		});
 		if ($("#scratches").html() != shtml){
 			$("#scratches").prepend(shtml);
 			latest_scratch = parseInt($(".scratch").eq(0).data("index"));
 		}
+		getThoughts();
 		var nhtml = "";
 		$(notifications).each(function(i,el){
 			if (!el.read){
@@ -83,11 +92,11 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 			fetch_home();
 			f.find("textarea").val("Success!");
 			f.removeClass('submitting');
-		} else if (data.status == "failure") {
+		} else if (data.status == "failure" || data == undefined) {
 			f.find("textarea").val("Failure... try again.");
 		}
 	});
-}).find("textarea").on("focus", function(){
+}).on("focus", "textarea", function(){
 	var originalval = $(this).val();
 	$(this).val("");
 	$(this).on("blur", function(){
@@ -146,8 +155,41 @@ $("#scratchboard h4 span").on("click", function(){
 	$("#scratchboard textarea").val($(this).text() + " " + curval);
 });
 
-
-
+function getusername(users,id){
+	var user = $(users).filter(function(i,el){
+		return el.id == id;
+	})[0];
+	console.log(user);
+	return user.username;
+}
+function getThoughts(){
+	var ids = [];
+	$(".scratch").each(function(){
+		ids.push($(this).data("index"))
+	});
+	$.getJSON("/thoughts/" + ids.join(","), function(data){
+		var thtml = {};
+		$(data).each(function(i,el){
+			if (!thtml[el.scratch_id]){
+				thtml[el.scratch_id] = "";
+			}
+			thtml[el.scratch_id] += '<div class="thought clearfix">';
+			thtml[el.scratch_id] += '<p class="thought_by">' + el.user.username + "</p>";
+			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext + "</p>"
+			thtml[el.scratch_id] += "</div>";
+		});
+		for (h in thtml){
+			if ($("#thoughts-for-" + h).html() != thtml[h]){
+				console.log("huh!!!")
+				$("#thoughts-for-" + h).html(thtml[h]);
+			}
+		}
+	});
+}
+$("#scratchboard").on("click", ".thought_link", function(e){
+	e.preventDefault();
+	$(this).hide().siblings("form").show();
+});
 
 
 

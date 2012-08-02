@@ -24,7 +24,7 @@ get "/home.json"  do
 	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ] ) || {}
 	@notifications = current_user.notifications
 	headers["Content-Type"] = "application/json"
-	"[" + @users.to_json(:exclude => [:phash, :salt], :methods => [:scratches]) + "," + @scratches.to_json + ","+ @notifications.to_json(:methods => [:creator] ) + "," + current_user.to_json + "]"
+	"[" + @users.to_json(:exclude => [:phash, :salt], :methods => [:scratches]) + "," + @scratches.to_json(:methods => [:thoughts]) + ","+ @notifications.to_json(:methods => [:creator] ) + "," + current_user.to_json + "]"
 end
 
 post "/scratch" do
@@ -140,4 +140,27 @@ post "/notifications/:id/read" do
 	else
 		{:status => "failure", :message => "Not authorized to modify someone else's notifications."}.to_json
 	end
+end
+
+
+post "/scratches/:id/thoughts" do
+	authenticate!
+	headers["Content-Type"] = "application/json"
+	t = Thought.new
+	t.mtext = params[:mtext]
+	t.scratch_id = params[:id]
+	t.user_id = current_user.id
+	if t.save
+		{:status => "success", :entry => t}.to_json
+	else
+		{:status => "failure", :entry => t}.to_json
+	end
+end
+
+get "/thoughts/:ids" do
+	authenticate!
+	headers["Content-Type"] = "application/json"
+	ids = params[:ids].split(",")
+	thoughts = Thought.all(:scratch_id => ids)
+	thoughts.to_json(:methods => [:user])
 end

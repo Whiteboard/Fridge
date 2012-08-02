@@ -514,18 +514,28 @@ h1 {
 #forms form, #scratchboard form {
   margin-bottom: 12px;
 }
-#forms input, #scratchboard input {
+input {
   display: block;
-  border: 1px solid #aaa;
-  background: #ccc;
+  border: 1px solid #777;
+  background: #aaa;
+  box-shadow: 0 0 0 #444,
+              1px 1px 0 #444,
+              2px 2px 0 #444,
+              3px 3px 0 #444;
   float: right;
   border-radius: 4px;
+  position: relative;
 }
-#forms input:hover, #scratchboard input:hover {
-  background: #444;
-  color: #ddd;
+input:hover{
+  background: #ccc;
+  color: #444;
 }
-#forms textarea, #scratchboard textarea {
+input:active {
+  top: 3px;
+  left: 3px;
+  box-shadow: none;
+}
+textarea {
   display: block;
   margin: 12px 0;
   width: 100%;
@@ -534,7 +544,7 @@ h1 {
   border-radius: 4px;
   padding: 12px;
 }
-#forms textarea:focus, #scratchboard textarea:focus {
+textarea:focus {
   outline: none;
   border: 1px solid #ccc;
 }
@@ -693,10 +703,6 @@ h1 {
 #focus {
   color: #ffb58d;
 }
-#rightbar form#focus_form textarea {
-  background-color: #232323;
-  color: #ffb58d;
-}
 
 .tweet {
   margin-bottom: 12px;
@@ -727,14 +733,42 @@ h1 {
   color: #fff;
 }
 form.submitting textarea {
-  color: #777 !important;
+  color: #777;
 }
 
-
-
-
-
-
-
+.thought {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #f4f0fb;
+  border-bottom: 1px solid #e8dcfc;
+}
+.thought p {
+  margin: 3px 0;
+}
+.thought_by {
+  width: 20%;
+  max-width: 100px;
+  float: left;
+}
+.thought_text {
+  width: 80%;
+  max-width: 570px;
+  margin-left: 20px;
+  float: left;
+}
+.thought_link {
+  margin: 3px 0;
+  padding: 12px;
+  display: block;
+  background: #e8dcfc;
+  /*border-bottom: 1px solid #e8dcfc;*/
+}
+.thought_form {
+  display: none;
+}
+.thought_form textarea {
+  background: #f0edf6;
+}
 
 
