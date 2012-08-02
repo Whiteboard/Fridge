@@ -151,4 +151,4 @@ $("#scratchboard h4 span").on("click", function(){
 
 
 
-setInterval(fetch_home, 3000);
+setInterval(fetch_home, 5000);
