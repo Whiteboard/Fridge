@@ -580,6 +580,7 @@ h1 {
   width: 100%;
   position: relative;
   text-decoration: none;
+  height: 110px;
 }
 #users .user.current_user {
   background: #cdecb9;
@@ -603,17 +604,14 @@ h1 {
   display: block;
   border-radius: 100px;
 }
-.user {
-  height: 200px;
-}
 #users .avatar {
   overflow: hidden;
   border-radius: 100px;
   margin-right: 20px;
   float: left;
-  width: 120px;
-  height: 120px;
-  top: 28px;
+  width: 70px;
+  height: 70px;
+  top: 16px;
   position: relative;
 }
   #users .avatar:after {
@@ -621,8 +619,8 @@ h1 {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 120px;
-    height: 120px;
+    width: 70px;
+    height: 70px;
     border-radius: 100px;
     box-shadow: inset 0 0 10px #000;
     content: "";
