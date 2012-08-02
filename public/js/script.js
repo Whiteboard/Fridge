@@ -23,11 +23,13 @@ function fetch_home(){
 				uhtml += '<p class="nickname">"'+el.nickname+'\"</p>';
 				uhtml += '<p class="focus">Focus: '+el.focus+'</p>';
 				uhtml += '<p class="location">Location: '+el.location+'</p>';
-				uhtml += '<p class="email"><a target="_blank" href="mailto:'+el.email+'">Email</a>';
+				uhtml += '<p class="email"><a target="_blank" href="mailto:'+el.email+'">Email</a></p>';
 				uhtml += '</div></div>';
 			}
 		});
 		if ($("#users").html() != uhtml){
+			console.log($("#users").html())
+			console.log(uhtml);
 			$("#users").html(uhtml);
 		}
 		if ($("#focus").html() != current_user.focus){
@@ -73,7 +75,7 @@ function fetch_home(){
 			if (!el.read){
 				var from = el.creator;
 				nhtml += '<div class="notification clearfix" data-index="'+ el.id +'"><p>From <b>' + from.username + '</b></p>';
-				nhtml += '<p class="notification_message">' + el.mtext + "</p>";
+				nhtml += '<p class="notification_message">' + el.mtext + '</p>';
 				nhtml += '<form action="/notifications/'+el.id+'/read" method="POST"><input type="submit" value="clear"></form>';
 				nhtml += "</div>";
 			}
@@ -190,8 +192,11 @@ function getThoughts(){
 			}
 			thtml[el.scratch_id] += '<div class="thought clearfix">';
 			thtml[el.scratch_id] += '<p class="thought_by">' + el.user.username + "</p>";
-			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext + "</p>"
-			thtml[el.scratch_id] += "</div>";
+			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext;
+			if (el.created_at){
+				 thtml[el.scratch_id] += '<span class="relativeTime floatright" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</span>';
+			}
+			thtml[el.scratch_id] += "</p></div>";
 		});
 		for (h in thtml){
 			if ($("#thoughts-for-" + h).html() != thtml[h]){

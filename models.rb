@@ -45,6 +45,7 @@ class Thought
 
 	property :id,			Serial
 	property :mtext,		String, :length => 350
+	property :created_at,	DateTime
 	belongs_to :scratch
 	belongs_to :user
 end

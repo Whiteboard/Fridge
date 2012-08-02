@@ -485,7 +485,7 @@ body {
    font-weight: 300;
 }
 #container {
-  min-width: 1400px;
+  min-width: 1000px;
 }
 h1 {
   background: #111;
@@ -509,6 +509,7 @@ h1 {
 #leftbar {
   float: left;
   width: 20%;
+  min-width: 200px;
   padding: 12px;
 }
 #forms {
@@ -564,11 +565,14 @@ textarea:focus {
 #scratchboard {
   float: left;
   width: 50%;
-  min-width: 700px;
+  min-width: 500px;
   padding: 12px;
 }
 .scratch {
   padding: 20px 0 0;
+  border-left: 5px solid #888;
+  box-shadow: 1px 1px 3px -1px #aaa, 0 0 8px -2px #ccc, inset 0 0 10px #eee;
+  border-radius: 4px;
   position: relative;
   margin-bottom: 20px;
 }
@@ -633,6 +637,7 @@ textarea:focus {
   float: right;
   width: 30%;
   padding: 12px;
+  min-width: 300px;
 }
 #users .user {
   background: #efefef;
@@ -640,7 +645,7 @@ textarea:focus {
   padding: 12px;
   float: left;
   width: 100%;
-  min-width: 440px;
+  min-width: 314px;
   position: relative;
   text-decoration: none;
   min-height: 110px;
@@ -701,8 +706,8 @@ textarea:focus {
 }
 #users .meta {
   float: left;
-  width: 70%;
-  max-width: 340px;
+  width: 65%;
+  min-width: 200px;
 }
 #users p {
   

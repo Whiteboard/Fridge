@@ -150,6 +150,7 @@ post "/scratches/:id/thoughts" do
 	t.mtext = params[:mtext]
 	t.scratch_id = params[:id]
 	t.user_id = current_user.id
+	t.created_at = Time.now
 	if t.save
 		{:status => "success", :entry => t}.to_json
 	else
