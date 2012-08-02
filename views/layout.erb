@@ -38,6 +38,12 @@
 </head>
 <body>
 	<div id="container">
+<h1>The Fridge
+	<% if logged_in? %>
+	<span id="focus">
+		<%= current_user.focus %>
+	</span>
+	<% end %></h1>
 		<div id="session_info">
 			<% if logged_in? %>
 				<form><p>Welcome back, <%= current_user_name %> | <a href="/logout">Logout</a><p></form>
@@ -45,8 +51,8 @@
 				<%= erb :login %>
 			<% end %>
 		</div>
-<% %w[notice error warning].each do |key| %>
-  <% if flash[key.to_sym] %>
+		<% %w[notice error warning].each do |key| %>
+<% if flash[key.to_sym] %>
     <div id="<%= key %>" class="flash">
       <%= flash[key.to_sym] %>
     </div>

@@ -1,3 +1,4 @@
+(function(jQuery, window, undefined){
 var latest_scratch = 0, latest_notification = 0;
 function fetch_home(){
 	twitter();
@@ -203,3 +204,16 @@ $("#scratchboard").on("click", ".thought_link", function(e){
 
 
 setInterval(fetch_home, 5000);
+
+
+
+
+
+
+
+
+
+
+
+
+}($, window));
