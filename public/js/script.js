@@ -14,16 +14,17 @@ function fetch_home(){
 		$(users).each(function(i,el){
 			if (el.logged_in){
 				if (el.id == current_user.id){
-					uhtml += '<a class="current_user user clearfix" href="mailto:'+el.email+'">';
+					uhtml += '<div class="current_user user clearfix" href="#">';
 				} else {
-					uhtml += '<a class="user clearfix" href="mailto:'+el.email+'">';
+					uhtml += '<div class="user clearfix">';
 				}
 				uhtml += '<div class="avatar" style="background:url('+el.avatar_url+') center; background-size:cover;"></div><div class="meta">';
-				uhtml += '<p class="username">'+el.username+'</p>';
+				uhtml += '<p class="username"><a>'+el.username+'</a></p>';
 				uhtml += '<p class="nickname">"'+el.nickname+'\"</p>';
 				uhtml += '<p class="focus">Focus: '+el.focus+'</p>';
 				uhtml += '<p class="location">Location: '+el.location+'</p>';
-				uhtml += '</div></a>';
+				uhtml += '<p class="email"><a target="_blank" href="mailto:'+el.email+'">Email</a>';
+				uhtml += '</div></div>';
 			}
 		});
 		if ($("#users").html() != uhtml){
@@ -81,7 +82,6 @@ function fetch_home(){
 			nhtml = "<i>no notifications at this time.</i>";
 		}
 		if ($("#notifications").html() != nhtml || $("#notifications").html() == ""){
-			console.log(nhtml);
 			$("#notifications").html(nhtml);
 		}
 		if (notifications.length > 0){
@@ -118,7 +118,6 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 
 
 $("body").on("focus", "textarea", function(){
-	console.log("focus fix");
 	$(this).on("keydown", function(e){
 		if (e.keyCode == 13){
 			e.preventDefault();
@@ -135,6 +134,14 @@ $("#scratchboard").on("click", ".posted_by", function(e){
 	var username = $(this).find("b").text();
 	$(window).scrollTop(0);
 	$("#scratchboard form textarea").focus().val("@"+username+" ");
+})
+$(document).on("click", ".user", function(e){
+	if ($(e.target).html() != "Email"){
+		e.preventDefault();
+		$(window).scrollTop(0);
+		var a = $(this).find("a").first();
+		$("#scratchboard form").first().find("textarea").blur().focus().val("@" + a.html() + " ");
+	}
 });
 
 
@@ -168,7 +175,6 @@ function getusername(users,id){
 	var user = $(users).filter(function(i,el){
 		return el.id == id;
 	})[0];
-	console.log(user);
 	return user.username;
 }
 function getThoughts(){
@@ -189,7 +195,6 @@ function getThoughts(){
 		});
 		for (h in thtml){
 			if ($("#thoughts-for-" + h).html() != thtml[h]){
-				console.log("huh!!!")
 				$("#thoughts-for-" + h).html(thtml[h]);
 			}
 		}

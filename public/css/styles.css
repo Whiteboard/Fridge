@@ -635,7 +635,6 @@ textarea:focus {
   background: #efefef;
   border-radius: 4px;
   padding: 12px;
-  display: block;
   float: left;
   width: 100%;
   min-width: 440px;
