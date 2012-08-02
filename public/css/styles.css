@@ -591,6 +591,7 @@ textarea:focus {
 }
 .scratch.focus {
   background-color: #fff0e4;
+  border-left-color: #ac6831;
 }
 .scratch.focus:before {
   position: absolute;
@@ -606,6 +607,7 @@ textarea:focus {
 }
 .scratch.location {
   background-color: #fffae4;
+  border-left-color: #a9953f;
 }
 .scratch.location:before {
   position: absolute;
