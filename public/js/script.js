@@ -193,7 +193,7 @@ function getThoughts(){
 }
 $("#scratchboard").on("click", ".thought_link", function(e){
 	e.preventDefault();
-	$(this).hide().siblings("form").show();
+	$(this).hide().siblings("form").show().find("textarea").focus();
 });
 
 
