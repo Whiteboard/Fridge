@@ -553,15 +553,15 @@ h1 {
   margin-right: 12px;
   margin-bottom: 12px;
   padding: 4px;
-  background-color: #dedede;
   display: block;
   text-align: center;
-  max-width: 100px;
+  max-width: 120px;
   max-height: 200px;
 }
 .scratch .posted_by img {
   max-width: 70px;
   max-height: 70px;
+  border-radius: 70px;
 }
 .scratch img {
   max-width: 100%;
@@ -615,7 +615,7 @@ h1 {
   float: left;
   width: 70px;
   height: 70px;
-  top: 16px;
+  top: 8px;
   position: relative;
 }
   #users .avatar:after {
@@ -653,7 +653,7 @@ h1 {
 .tweet {
   margin-bottom: 12px;
   padding: 6px;
-  background-color: #CCF5FF;
+  background-color: #e2f9ff;
 }
 .tweet p {
   margin: 0;
