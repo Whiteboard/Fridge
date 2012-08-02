@@ -543,6 +543,7 @@ h1 {
 #scratchboard {
   float: left;
   width: 50%;
+  min-width: 700px;
   padding: 12px;
 }
 .scratch {
@@ -555,8 +556,13 @@ h1 {
   padding: 4px;
   display: block;
   text-align: center;
-  width: 120px;
+  max-width: 120px;
+  width: 20%;
   max-height: 150px;
+}
+.scratch .scratch_content {
+  width: 80%;
+  max-width: 580px;
 }
 .scratch .posted_by img {
   max-width: 70px;
