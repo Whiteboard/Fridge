@@ -519,6 +519,7 @@ h1 {
 #forms form, #scratchboard form {
   margin-bottom: 12px;
 }
+
 input {
   display: block;
   border: 1px solid #777;
@@ -531,9 +532,10 @@ input {
               1px 1px 0 #444,
               2px 2px 0 #444,
               3px 3px 0 #444;
-  float: right;
+  right: 0px;
   border-radius: 4px;
   position: relative;
+  float: right;
 }
 input:hover{
   background: #ccc;
@@ -826,3 +828,15 @@ form.submitting textarea {
   padding: 12px;
   background: #f8f0c8;
   border-bottom: 1px solid #e0d395;
+}
+.autocomplete {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.autocomplete li {
+  background: #eee;
+  border-bottom: 1px solid #ccc;
+  padding: 12px;
+  margin: 0;
+}

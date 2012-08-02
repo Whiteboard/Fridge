@@ -167,3 +167,10 @@ get "/thoughts/:ids" do
 	thoughts = Thought.all(:scratch_id => ids)
 	thoughts.to_json(:methods => [:user])
 end
+
+get "/usernames.json" do
+	authenticate!
+	headers["Content-Type"] = "application/json"
+	@users = User.all(:username.like => "%" + params[:val] + "%")
+	@users.to_json(:only => [:username])
+end

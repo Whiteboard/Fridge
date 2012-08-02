@@ -115,6 +115,7 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 	$(this).val("");
 	$(this).on("blur", function(){
 		if ($(this).val() == ""){
+			$(".autocomplete").remove();
 			$(this).val(originalval);
 		}
 	});
@@ -233,7 +234,40 @@ $(document).on("keydown", function(e){
 		e.preventDefault();
 		$("#scratchboard form").first().find("textarea").blur().focus().val("#location: ");
 	}
+}).on("keyup", function(e){
+	if ($(e.target).val().indexOf("@") >= 0){
+		setTimeout(function(){
+			autoComplete($(e.target).val());
+		}, 300);
+	} else {
+		$(".autocomplete").remove();
+	}
 });
+
+function autoComplete(value){
+	// to do: autocomplete
+	var html = "";
+	value = $.trim(value.replace("@", ""));
+	$.getJSON("/usernames.json", {val : value}, function(data){
+		if (data.length > 0){
+			html += '<ul class="autocomplete">';
+			$(data).each(function(i,u){
+				html += "<li>" + u.username + "</li>";
+			});
+			html += "</ul>";
+		}
+		if (html != ""){
+			$("#scratchboard").find("ul.autocomplete").remove().end().find("form").first().find("textarea").after(html);
+			$(".autocomplete").on("click", "li", function(){
+				$("#scratchboard form").first().find("textarea").blur().focus().val("@" + $(this).html() + " ");
+				$(this).parents("ul").remove();
+			})
+		} else {
+			$(".autocomplete").off("click");
+		}
+	});
+	return;
+}
 
 } // ending body check
 }($, window));
