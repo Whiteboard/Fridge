@@ -575,7 +575,7 @@ textarea:focus {
   background: ;
 }
 .scratch.focus {
-  background-color: #ffdcc2;
+  background-color: #fff0e4;
 }
 .scratch.focus:before {
   position: absolute;
@@ -590,7 +590,7 @@ textarea:focus {
   padding: 3px;
 }
 .scratch.location {
-  background-color: #fff0e4;
+  background-color: #fffae4;
 }
 .scratch.location:before {
   position: absolute;
