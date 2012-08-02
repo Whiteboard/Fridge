@@ -46,7 +46,7 @@ post "/scratch" do
 	if params[:message].match(/@[a-zA-Z1-9]+/i)
 		users = params[:message].scan(/@[a-zA-Z1-9]+/i)
 		users.each do |u|
-			u.delete! "@"
+			u.slice! "@"
 			user = User.first(:username => u)
 			next if user.nil?
 			n = Notification.new
@@ -68,18 +68,18 @@ post "/scratch" do
 			end
 		end
 	end
-	if params[:message].match(/#location:\s/i)
-		location = params[:message].delete "#location: "
+	if params[:message].match(/#location/i)
+		location = params[:message].gsub "#location", ""
 		u = current_user
-		u.location = location
+		u.location = location.strip
 		if !u.save
 			({ :status => "failure", :entry => location }).to_json
 		end
 	end
-	if params[:message].match(/#focus:\s/i)
-		focus = params[:message].delete "#focus: "
+	if params[:message].match(/#focus/i)
+		focus = params[:message].gsub "#focus", ""
 		u = current_user
-		u.focus = focus
+		u.focus = focus.strip
 		if !u.save
 			({ :status => "failure", :entry => focus }).to_json
 		end

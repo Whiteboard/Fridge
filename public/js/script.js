@@ -35,7 +35,13 @@ function fetch_home(){
 				var user = $(users).filter(function(i){
 					return this.id == el.user_id;
 				})[0];
-				shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
+				if (el.mtext.indexOf("#focus") >= 0){
+					shtml += '<div class="scratch focus clearfix" data-index="' + el.id + '">';
+				} else if (el.mtext.indexOf("#location") >= 0){
+					shtml += '<div class="scratch location clearfix" data-index="' + el.id + '">';
+				} else {
+					shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
+				}
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
 				shtml += '<div class="floatleft scratch_content">';
 				shtml += '<p>'+el.mtext+ '</p>';
@@ -133,7 +139,11 @@ function buildtweets(data){
 		$("#twitter").html(h);
 	}
 }
-
+$("#scratchboard h4 span").on("click", function(){
+	$("#scratchboard textarea").focus();
+	var curval = $("#scratchboard textarea").val()
+	$("#scratchboard textarea").val($(this).text() + " " + curval);
+});
 
 
 

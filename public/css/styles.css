@@ -508,6 +508,9 @@ h1 {
   width: 20%;
   padding: 12px;
 }
+#forms {
+  display: none;
+}
 #forms form, #scratchboard form {
   margin-bottom: 12px;
 }
@@ -540,6 +543,11 @@ h1 {
   padding-top: 12px;
   margin: 0;
 }
+#scratchboard h4 span {
+  font-weight: 300;
+  text-decoration: underline;
+  cursor: pointer;
+}
 #scratchboard {
   float: left;
   width: 50%;
@@ -549,6 +557,37 @@ h1 {
 .scratch {
   border-bottom: 1px solid #efefef;
   padding: 20px 0;
+  position: relative;
+}
+.scratch.focus {
+  background-color: #ffdcc2;
+}
+.scratch.focus:before {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  content: "FOCUS";
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-size: 80%;
+  color: #733609;
+  background-color: #b15918;
+  padding: 3px;
+}
+.scratch.location {
+  background-color: #fffac4;
+}
+.scratch.location:before {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  content: "LOCATION";
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-size: 80%;
+  color: #c2b845;
+  background-color: #efe468;
+  padding: 3px;
 }
 .scratch .posted_by {
   margin-right: 12px;
@@ -565,7 +604,7 @@ h1 {
   max-width: 580px;
 }
 .scratch .posted_by img {
-  max-width: 70px;
+  width: 70px;
   max-height: 70px;
   border-radius: 70px;
 }
