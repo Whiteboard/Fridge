@@ -626,7 +626,7 @@ h1 {
   min-width: 440px;
   position: relative;
   text-decoration: none;
-  height: 110px;
+  min-height: 110px;
 }
 .user p {
   margin: 0;
