@@ -81,9 +81,9 @@ function fetch_home(){
 			$("#notifications").html(nhtml);
 		}
 		if (notifications.length > 0){
-			$("title").val("(" + notifications.length + ")");
+			document.title = "(" + notifications.length + ")" + " The Fridge");
 		} else {
-			$("title").val("The Fridge");
+			document.title = "The Fridge";
 		}
 	});
 }
