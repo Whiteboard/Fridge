@@ -493,55 +493,54 @@ h1 {
 }
 #session_info {
   padding: 10px 30px;
-  background-color: #c6e6f9;
+  background-color: #666;
   color: #fff;
 }
 #session_info p {
   padding: 0;
   margin: 0;
 }
-#forms {
+#session_info a {
+  color: #ededed;
+}
+#leftbar {
   float: left;
   width: 20%;
   padding: 12px;
 }
-#forms form {
-  margin-bottom: 30px;
-  padding: 4px;
-  background: #eee;
+#forms form, #scratchboard form {
   margin-bottom: 12px;
 }
-#forms input {
+#forms input, #scratchboard input {
   display: block;
   border: 1px solid #aaa;
   background: #ccc;
   float: right;
   border-radius: 4px;
 }
-#forms input:hover {
+#forms input:hover, #scratchboard input:hover {
   background: #444;
   color: #ddd;
 }
-#forms textarea {
+#forms textarea, #scratchboard textarea {
   display: block;
-  margin: 12px 5%;
-  width: 90%;
+  margin: 12px 0;
+  width: 100%;
   background: #dedede;
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 12px;
 }
-#forms textarea:focus {
+#forms textarea:focus, #scratchboard textarea:focus {
   outline: none;
   border: 1px solid #ccc;
 }
-#forms h4 {
-  text-indent: 5%;
+#forms h4, #scratchboard h4 {
   padding: 0;
   padding-top: 12px;
   margin: 0;
 }
-#scratches {
+#scratchboard {
   float: left;
   width: 50%;
   padding: 12px;
@@ -550,12 +549,27 @@ h1 {
   border-bottom: 1px solid #efefef;
   padding: 20px 0;
 }
-#scratches img {
+.scratch .posted_by {
+  margin-right: 12px;
+  margin-bottom: 12px;
+  padding: 4px;
+  background-color: #dedede;
+  display: block;
+  text-align: center;
+  max-width: 100px;
+  max-height: 200px;
+}
+.scratch .posted_by img {
+  max-width: 70px;
+  max-height: 70px;
+}
+.scratch img {
   max-width: 100%;
 }
-#users {
+#rightbar {
   float: right;
   width: 30%;
+  padding: 12px;
 }
 #users .user {
   background: #efefef;
@@ -563,21 +577,43 @@ h1 {
   padding: 12px;
   display: block;
   float: left;
-  width: 40%;
-  margin: 5%;
-  text-align: center;
+  width: 100%;
+  position: relative;
   text-decoration: none;
+}
+#users .user.current_user {
+  background: #cdecb9;
+}
+#users .user.current_user:before {
+  content: "This is you.";
+  position: absolute;
+  height: 20px;
+  top: 0px;
+  right: 0px;
+  background: #444;
+  color: #999;
+  padding: 2px 3px;
 }
 #users .user:hover {
   background: #dedede;
 }
 #users img {
   max-width: 100%;
+  margin-right: 20px;
   display: block;
   border-radius: 100px;
 }
+.user {
+  height: 200px;
+}
 #users .avatar {
   overflow: hidden;
+  border-radius: 100px;
+  margin-right: 20px;
+  float: left;
+  width: 120px;
+  height: 120px;
+  top: 28px;
   position: relative;
 }
   #users .avatar:after {
@@ -585,8 +621,8 @@ h1 {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 120px;
     border-radius: 100px;
     box-shadow: inset 0 0 10px #000;
     content: "";
@@ -594,3 +630,61 @@ h1 {
 #users .username {
   font-weight: bold;
 }
+#users .username:before {
+  content: "@";
+  font-weight: 300;
+}
+#users .meta {
+  float: left;
+}
+#users p {
+  
+}
+#focus {
+  color: #ffb58d;
+}
+#rightbar form#focus_form textarea {
+  background-color: #232323;
+  color: #ffb58d;
+}
+
+.tweet {
+  margin-bottom: 12px;
+  padding: 6px;
+  background-color: #CCF5FF;
+}
+.tweet p {
+  margin: 0;
+  padding: 0;
+}
+#notifications {}
+.notification {
+  padding: 12px;
+  background: #efefef;
+}
+.notification p {
+  margin: 0;
+  padding: 0;
+}
+.notification input {
+  float: right;
+  border: 1px solid #b6380c;
+  font-weight: 300;
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #ed6535;
+  color: #fff;
+}
+form.submitting textarea {
+  color: #777 !important;
+}
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,8 @@ post "/users/create" do
  	puts user.inspect
  	if user.save
  		session[:username] = user.username
+ 		user.logged_in = true
+ 		user.save
  		flash[:notice] = "Thanks for joining, #{session[:username]}!"
  		redirect '/'
  	else
@@ -49,6 +51,10 @@ post '/login' do
 end
 
 get '/logout' do
+	if current_user.nil?
+		session.clear
+		redirect '/'
+	end
 	authenticate!
 	u = current_user
 	u.logged_in = false
