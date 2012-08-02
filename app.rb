@@ -76,6 +76,14 @@ post "/scratch" do
 			({ :status => "failure", :entry => location }).to_json
 		end
 	end
+	if params[:message].match(/#focus:\s/i)
+		focus = params[:message].delete "#focus: "
+		u = current_user
+		u.focus = focus
+		if !u.save
+			({ :status => "failure", :entry => focus }).to_json
+		end
+	end
 	s = Scratch.new
 	s.jsfiddle = jsfiddle || nil
 	s.clly = clly || nil
