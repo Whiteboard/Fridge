@@ -226,6 +226,10 @@ $(document).on("keydown", function(e){
 	if (e.keyCode == 83 ){
 		e.preventDefault();
 		$("#scratchboard form").first().find("textarea").blur().focus();
+	} else if (e.keyCode == 70){
+		$("#scratchboard form").first().find("textarea").blur().focus().val("#focus: ");
+	} else if (e.keyCode == 76){
+		$("#scratchboard form").first().find("textarea").blur().focus().val("#location: ");
 	}
 });
 
