@@ -3,7 +3,7 @@
 if ($("body").hasClass("fridge")){
 
 var latest_scratch = 0, latest_notification = 0,
-	kLINK_DETECTION_REGEX = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi;
+	kLINK_DETECTION_REGEX = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
 function fetch_home(){
 	twitter();
 	$.getJSON("/home.json", function(data){
@@ -25,13 +25,12 @@ function fetch_home(){
 				uhtml += '<div class="avatar" style="background:url('+el.avatar_url+') center; background-size:cover;"></div><div class="meta">';
 				uhtml += '<p class="username"><a>'+el.username+'</a></p>';
 				uhtml += '<p class="nickname">"'+el.nickname+'\"</p>';
-				uhtml += '<p class="focus">Focus: '+el.focus+'</p>';
-				uhtml += '<p class="location">Location: '+el.location+'</p>';
+				uhtml += '<p class="focus">Focus: '+ replaceLinks(el.focus)+'</p>';
+				uhtml += '<p class="location">Location: '+ replaceLinks(el.location) +'</p>';
 				uhtml += '<p class="email"><a target="_blank" href="mailto:'+el.email+'">Email</a></p>';
 				uhtml += '</div></div>';
 			}
 		});
-		uhtml = uhtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if ($("#users").html() != uhtml){
 			$("#users").html(uhtml);
 		}
@@ -54,7 +53,7 @@ function fetch_home(){
 				shtml += "<div class='clearfix'>";
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
 				shtml += '<div class="floatleft scratch_content">';
-				shtml += '<p>'+el.mtext+ '</p>';
+				shtml += '<p>'+ replaceLinks(el.mtext) + '</p>';
 				shtml += '<p class="boomcount" id="boomcount-for-'+el.id+'">' + el.boomcount + " Booms</p>";
 				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += (el.clly) ? el.clly : "";
@@ -70,7 +69,6 @@ function fetch_home(){
 				shtml += '</div>';
 			}
 		});
-		shtml = shtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if ($("#scratches").html() != shtml){
 			$("#scratches").prepend(shtml);
 			latest_scratch = parseInt($(".scratch").eq(0).data("index"));
@@ -82,12 +80,11 @@ function fetch_home(){
 			if (!el.read){
 				var from = el.creator;
 				nhtml += '<div class="notification clearfix" data-index="'+ el.id +'"><p>From <b>' + from.username + '</b></p>';
-				nhtml += '<p class="notification_message">' + el.mtext + '</p>';
+				nhtml += '<p class="notification_message">' + replaceLinks(el.mtext) + '</p>';
 				nhtml += '<form action="/notifications/'+el.id+'/read" method="POST"><input type="submit" value="clear"></form>';
 				nhtml += "</div>";
 			}
 		});
-		nhtml = nhtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if (nhtml == ""){
 			nhtml = "<i>no notifications at this time.</i>";
 		}
@@ -180,11 +177,10 @@ function buildtweets(data){
 	var h = "";
 	$(data.results).each(function(i,el){
 		h += '<div class="tweet"><a class="from_user" href="http://twitter.com/'+el.from_user+'">'+el.from_user+"</a>";
-		h += '<p class="tweettext">'+el.text+"</p>";
+		h += '<p class="tweettext">'+ replaceLinks(el.text) +"</p>";
 		h += '<small class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</small>';
 		h += "</div>";
 	});
-	h = h.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 	if ($("#twitter").html() != h){
 		$("#twitter").html(h);
 	}
@@ -214,7 +210,7 @@ function getThoughts(){
 			}
 			thtml[el.scratch_id] += '<div class="thought clearfix">';
 			thtml[el.scratch_id] += '<p class="thought_by">' + el.user.username + "</p>";
-			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');;
+			thtml[el.scratch_id] += '<p class="thought_text">' + replaceLinks(el.mtext);
 			if (el.created_at){
 				 thtml[el.scratch_id] += '<span class="relativeTime floatright" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</span>';
 			}
@@ -298,6 +294,9 @@ function autoComplete(value){
 		}
 	});
 	return;
+}
+function replaceLinks (s){
+	return s.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 }
 
 $("#rightbar").on("mouseenter", function(e){
