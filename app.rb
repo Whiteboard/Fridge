@@ -132,7 +132,7 @@ post "/notifications/:id/read" do
 	authenticate!
 	headers["Content-Type"] = "application/json"
 	n = Notification.first(:id => params[:id])
-	if current_user.notifications.include? n
+	if current_user.notifieds.include? n
 		n.read = true
 		if n.save
 			{:status => "success"}.to_json
