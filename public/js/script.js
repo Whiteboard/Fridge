@@ -289,5 +289,9 @@ function autoComplete(value){
 	return;
 }
 
+$("#rightbar").on("mouseenter", function(e){
+	$(this).toggleClass("open");
+});
+
 } // ending body check
 }($, window));

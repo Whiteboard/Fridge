@@ -480,13 +480,23 @@ block {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+h1,h2,h3,h4,h5,h6 {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+}
+form input {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+}
 body {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "Merriweather", serif;
+   font-size: 14px;
    color: #444;
    font-weight: 300;
 }
 .fridge #container {
-  min-width: 1000px;
+  width: 100%;
+  overflow: hidden;
+  min-width: 1033px;
 }
 h1 {
   background: #111;
@@ -662,9 +672,14 @@ textarea:focus {
 }
 #rightbar {
   float: right;
-  width: 30%;
   padding: 12px;
-  min-width: 300px;
+  width: 108px;
+  -webkit-transition: width 0.2s linear;
+  overflow: hidden;
+}
+#rightbar.open {
+  width: 308px;
+  -webkit-transition: width 0.2s linear;
 }
 #users .user {
   background: #efefef;
@@ -672,7 +687,7 @@ textarea:focus {
   padding: 12px;
   float: left;
   width: 100%;
-  min-width: 314px;
+  min-width: 300px;
   position: relative;
   text-decoration: none;
   min-height: 110px;
@@ -734,7 +749,7 @@ textarea:focus {
 #users .meta {
   float: left;
   width: 65%;
-  min-width: 200px;
+  min-width: 180px;
 }
 #users p {
   
