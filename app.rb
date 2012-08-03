@@ -192,3 +192,11 @@ post "/scratch/:id/boom" do
 		{:status => "success", :entry => s}.to_json
 	end
 end
+
+post "/git/deploy" do
+	u = User.get(:username => "picard")
+	s = Scratch.new(:user_id => u.id)
+	s.mtext = "New commit, comrades. From:" + params[:user] + " - Details: \"" + params[:head_long] + "\""
+	s.created_at = Time.now
+	s.save
+end
