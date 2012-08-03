@@ -875,3 +875,40 @@ form.submitting textarea {
   padding: 12px;
   margin: 0;
 }
+.overlay {
+  z-index: 9995;
+  background-color: #000;
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+.overlay_content {
+  z-index: 9999;
+  position: fixed;
+  left: 5%;
+  top: 5%;
+  width: 90%;
+  height: 90%;
+  background-size: cover;
+  background-position: center;
+}
+.close_overlay {
+  position: fixed;
+  z-index: 99999;
+  font-size: 1.2em;
+  font-family: sans-serif;
+  background: #333;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  border: 3px solid white;
+  height: 30px;
+  width: 30px;
+  line-height: 24px;
+  text-align: center;
+  top: 5%;
+  right: 5%;
+}

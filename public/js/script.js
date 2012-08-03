@@ -147,7 +147,9 @@ $("#scratchboard").on("click", ".posted_by", function(e){
 	var username = $(this).find("b").text();
 	$(window).scrollTop(0);
 	$("#scratchboard form textarea").focus().val("@"+username+" ");
-})
+}).on("click", "img", function(){
+	$('<div class="overlay"></div><div class="overlay_content" style="background-image: url('+$(this).attr("src")+');"><div class="close_overlay">X</div>').appendTo("body");
+});
 $(document).on("click", ".user", function(e){
 	if ($(e.target).html() != "Email"){
 		e.preventDefault();
@@ -155,7 +157,11 @@ $(document).on("click", ".user", function(e){
 		var a = $(this).find("a").first();
 		$("#scratchboard form").first().find("textarea").blur().focus().val("@" + a.html() + " ");
 	}
-});
+}).on("click", ".close_overlay, .overlay", function(){
+	$(".overlay, .overlay_content, .close_overlay").fadeOut(function(){
+		$(".overlay, .overlay_content, .close_overlay").remove();
+	})
+})
 
 
 function twitter(){
