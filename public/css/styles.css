@@ -929,3 +929,13 @@ footer {
 footer a {
   color: #ddd;
 }
+.tldr {
+  display: none;
+}
+a.tldr {
+  font-family: sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline;
+}
