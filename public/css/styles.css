@@ -660,6 +660,7 @@ textarea:focus {
 }
 .scratch .scratch_content {
   min-width: 364px;
+  width: 75%;
   max-width: 636px;
 }
 .scratch .posted_by img {
