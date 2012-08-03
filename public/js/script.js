@@ -53,7 +53,7 @@ function fetch_home(){
 				shtml += "<div class='clearfix'>";
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
 				shtml += '<div class="floatleft scratch_content">';
-				shtml += '<p>'+ replaceLinks(el.mtext) + '</p>';
+				shtml += '<div class="mtext">'+ replaceLinks(el.mtext) + '</div>';
 				shtml += '<p class="boomcount" id="boomcount-for-'+el.id+'">' + el.boomcount + " Booms</p>";
 				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += (el.clly) ? el.clly : "";
