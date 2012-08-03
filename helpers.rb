@@ -29,4 +29,7 @@ helpers do
 			@username = current_user
 		end
 	end
+	def commit_message
+		`git show`
+	end
 end
