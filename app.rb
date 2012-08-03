@@ -192,7 +192,6 @@ post "/scratch/:id/boom" do
 		{:status => "success", :entry => s}.to_json
 	end
 end
-
 post "/git/deploy" do
 	u = User.get(:username => "picard")
 	s = Scratch.new(:user_id => u.id)
