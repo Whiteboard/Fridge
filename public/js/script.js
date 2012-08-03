@@ -2,7 +2,8 @@
 
 if ($("body").hasClass("fridge")){
 
-var latest_scratch = 0, latest_notification = 0;
+var latest_scratch = 0, latest_notification = 0,
+	kLINK_DETECTION_REGEX = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi;
 function fetch_home(){
 	twitter();
 	$.getJSON("/home.json", function(data){
@@ -30,6 +31,7 @@ function fetch_home(){
 				uhtml += '</div></div>';
 			}
 		});
+		uhtml = uhtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if ($("#users").html() != uhtml){
 			$("#users").html(uhtml);
 		}
@@ -68,6 +70,7 @@ function fetch_home(){
 				shtml += '</div>';
 			}
 		});
+		shtml = shtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if ($("#scratches").html() != shtml){
 			$("#scratches").prepend(shtml);
 			latest_scratch = parseInt($(".scratch").eq(0).data("index"));
@@ -84,6 +87,7 @@ function fetch_home(){
 				nhtml += "</div>";
 			}
 		});
+		nhtml = nhtml.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 		if (nhtml == ""){
 			nhtml = "<i>no notifications at this time.</i>";
 		}
@@ -180,6 +184,7 @@ function buildtweets(data){
 		h += '<small class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</small>';
 		h += "</div>";
 	});
+	h = h.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
 	if ($("#twitter").html() != h){
 		$("#twitter").html(h);
 	}
@@ -209,7 +214,7 @@ function getThoughts(){
 			}
 			thtml[el.scratch_id] += '<div class="thought clearfix">';
 			thtml[el.scratch_id] += '<p class="thought_by">' + el.user.username + "</p>";
-			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext;
+			thtml[el.scratch_id] += '<p class="thought_text">' + el.mtext.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');;
 			if (el.created_at){
 				 thtml[el.scratch_id] += '<span class="relativeTime floatright" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</span>';
 			}
