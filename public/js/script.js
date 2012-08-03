@@ -297,8 +297,10 @@ function autoComplete(value){
 }
 function replaceLinks(s){
 	if (s){
-		if (!s.indexOf("iframe") >= 0){
+		if (!(s.indexOf("iframe") >= 0)){
 			return s.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
+		} else {
+			return s;
 		}
 	}
 }

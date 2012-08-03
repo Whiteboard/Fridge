@@ -498,6 +498,9 @@ body {
   overflow: hidden;
   min-width: 1033px;
 }
+iframe, object {
+  max-width: 100%;
+}
 h1 {
   background: #111;
   padding: 30px;
