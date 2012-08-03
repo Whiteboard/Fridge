@@ -31,7 +31,7 @@ class Scratch
 	include DataMapper::Resource
 
 	property :id,			Serial
-	property :mtext, 		String, :length => 350
+	property :mtext, 		String, :length => 1000
 	property :created_at, 	DateTime
 	property :clly,			String, :length => 350
 	property :jsfiddle,		String, :length => 350
