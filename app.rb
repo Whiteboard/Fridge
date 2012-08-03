@@ -197,7 +197,7 @@ end
 post "/git/deploy" do
 	u = User.first(:username => "picard")
 	s = Scratch.new(:user_id => u.id)
-	s.mtext = "New commit, comrades. From:" + params[:user] + " - Details: \"" + params[:head_long] + "\""
+	s.mtext = "New commit, comrades. From: <a href='mailto:#{params[:user]}'>" + params[:user] + "</a> - Details: \"" + params[:head_long] + "\""
 	s.created_at = Time.now
 	s.save
 end
