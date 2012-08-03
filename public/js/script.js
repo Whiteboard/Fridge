@@ -307,5 +307,9 @@ $("#rightbar").on("mouseenter", function(e){
 	$(this).toggleClass("open");
 });
 
+$("footer .show_commit").on("click", function(){
+	$(".commit_message").toggle();
+});
+
 } // ending body check
 }($, window));

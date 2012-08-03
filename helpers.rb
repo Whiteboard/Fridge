@@ -30,6 +30,6 @@ helpers do
 		end
 	end
 	def commit_message
-		`git show`
+		return `git show`
 	end
 end

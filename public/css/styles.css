@@ -912,3 +912,17 @@ form.submitting textarea {
   top: 5%;
   right: 5%;
 }
+
+
+footer {
+  width: 100%;
+  padding: 30px;
+  color: #dedede;
+  background: #232323;
+}
+.commit_message {
+  display: none;
+}
+footer a {
+  color: #ddd;
+}
