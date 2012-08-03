@@ -11,6 +11,7 @@ DataMapper::Logger.new(STDOUT, :debug)
 require './models.rb'
 require './users_controller.rb'
 
+
 get "/" do
 	if logged_in?
 		@bodyclass = "fridge"
