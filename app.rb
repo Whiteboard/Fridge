@@ -20,7 +20,6 @@ get "/" do
 		erb :'users/new', :layout => :layout
 	end
 end
-
 get "/home.json"  do
 	@users = User.all
 	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ] ) || {}
