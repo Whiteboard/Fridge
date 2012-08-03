@@ -307,9 +307,6 @@ $("#rightbar").on("mouseenter", function(e){
 	$(this).toggleClass("open");
 });
 
-$("footer .show_commit").on("click", function(){
-	$(".commit_message").toggle();
-});
 
 setInterval(fetch_home, 3000);
 

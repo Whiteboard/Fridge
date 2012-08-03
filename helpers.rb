@@ -29,7 +29,4 @@ helpers do
 			@username = current_user
 		end
 	end
-	def commit_message
-		return File.read("tmp/commit")
-	end
 end
