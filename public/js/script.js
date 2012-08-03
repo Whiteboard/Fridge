@@ -245,8 +245,6 @@ setTimeout(function(){
 	$(".flash").slideUp(function(){$(".flash").remove()});
 }, 3000);
 
-// setInterval(fetch_home, 5000);
-
 $(document).on("keydown", function(e){
 	if ($(e.target).parents("form").length){
 		return;
@@ -312,6 +310,8 @@ $("#rightbar").on("mouseenter", function(e){
 $("footer .show_commit").on("click", function(){
 	$(".commit_message").toggle();
 });
+
+setInterval(fetch_home, 3000);
 
 } // ending body check
 }($, window));
