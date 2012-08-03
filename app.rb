@@ -167,6 +167,14 @@ get "/thoughts/:ids" do
 	thoughts = Thought.all(:scratch_id => ids)
 	thoughts.to_json(:methods => [:user])
 end
+get "/booms/:ids" do
+	authenticate!
+	headers["Content-Type"] = "application/json"
+	ids = params[:ids].split(",")
+	update_scratches = Scratch.all(:id => ids, :boomcount.gt => 0)
+	update_scratches.to_json(:methods => [:user])
+end
+
 
 get "/usernames.json" do
 	authenticate!

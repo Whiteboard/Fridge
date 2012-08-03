@@ -516,8 +516,24 @@ h1 {
 #forms {
   display: none;
 }
-#forms form, #scratchboard form {
+form {
   margin-bottom: 12px;
+}
+
+.boomcount {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin: 0;
+}
+form.boom_form {
+
+}
+form.boom_form input {
+  background: #ff9211;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  float: none;
 }
 
 input {
@@ -573,6 +589,7 @@ textarea:focus {
   float: left;
   width: 50%;
   min-width: 500px;
+  max-width: 900px;
   padding: 12px;
 }
 .scratch {
@@ -601,7 +618,7 @@ textarea:focus {
   font-weight: 500;
   letter-spacing: 0.05em;
   font-size: 80%;
-  color: #733609;
+  color: #fde1c0;
   background-color: #b15918;
   padding: 3px;
 }
@@ -632,6 +649,8 @@ textarea:focus {
   max-height: 150px;
 }
 .scratch .scratch_content {
+  min-width: 364px;
+  max-width: 636px;
 }
 .scratch .posted_by img {
   width: 70px;

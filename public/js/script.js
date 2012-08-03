@@ -31,8 +31,6 @@ function fetch_home(){
 			}
 		});
 		if ($("#users").html() != uhtml){
-			console.log($("#users").html())
-			console.log(uhtml);
 			$("#users").html(uhtml);
 		}
 		if ($("#focus").html() != current_user.focus){
@@ -55,6 +53,8 @@ function fetch_home(){
 				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
 				shtml += '<div class="floatleft scratch_content">';
 				shtml += '<p>'+el.mtext+ '</p>';
+				shtml += '<p class="boomcount" id="boomcount-for-'+el.id+'">' + el.boomcount + " Booms</p>";
+				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += (el.clly) ? el.clly : "";
 				shtml += (el.jsfiddle) ? el.jsfiddle : "";
 				shtml += '<br><small><i class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</i></small></div></div>';
@@ -65,8 +65,6 @@ function fetch_home(){
 				shtml += '<textarea name="mtext">A thought...</textarea>';
 				shtml += '<input type="submit" value="post">';
 				shtml += '</form>';
-				// shtml += '<p class="boomcount">' + el.boomcount + "</p>";
-				// shtml += '<form action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += '</div>';
 			}
 		});
@@ -75,6 +73,7 @@ function fetch_home(){
 			latest_scratch = parseInt($(".scratch").eq(0).data("index"));
 		}
 		getThoughts();
+		getBooms();
 		var nhtml = "";
 		$(notifications).each(function(i,el){
 			if (!el.read){
@@ -103,6 +102,11 @@ fetch_home();
 $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
 	var f = $(this);
+	if (f.hasClass("boom_form")){
+				var curbc = parseInt(f.siblings(".boomcount").html().split(" ")[0]);
+				curbc++;
+				f.siblings(".boomcount").html(curbc + " Booms");
+			}
 	$.post(f.attr("action"), f.serialize(), function(data){
 		console.log(data);
 		if (data.status == "success"){
@@ -212,6 +216,19 @@ function getThoughts(){
 		}
 	});
 }
+function getBooms(){
+	var ids = [];
+	$(".scratch").each(function(){
+		ids.push($(this).data("index"))
+	});
+	$.getJSON("/booms/" + ids.join(","), function(data){
+		$(data).each(function(i,el){
+			if ($("#boomcount-for-" + el.id).html() != el.boomcount + " Booms"){
+				$("#boomcount-for-" + el.id).html(el.boomcount + " Booms");
+			}
+		});
+	});
+}
 $("#scratchboard").on("click", ".thought_link", function(e){
 	e.preventDefault();
 	$(this).hide().siblings("form").show().find("textarea").focus();
@@ -221,7 +238,7 @@ setTimeout(function(){
 	$(".flash").slideUp(function(){$(".flash").remove()});
 }, 3000);
 
-setInterval(fetch_home, 5000);
+// setInterval(fetch_home, 5000);
 
 $(document).on("keydown", function(e){
 	if ($(e.target).parents("form").length){
