@@ -306,7 +306,9 @@ function replaceLinks(s){
 $("#rightbar").on("mouseenter", function(e){
 	$(this).toggleClass("open");
 });
-
+$("body").on("click", "a.tldr", function(){
+	$(this).siblings(".tldr").toggle(200);
+});
 
 setInterval(fetch_home, 3000);
 
