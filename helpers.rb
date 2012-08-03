@@ -30,6 +30,6 @@ helpers do
 		end
 	end
 	def commit_message
-		return `git show`
+		return File.read("tmp/commit")
 	end
 end
