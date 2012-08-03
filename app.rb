@@ -14,6 +14,7 @@ require './users_controller.rb'
 
 get "/" do
 	if logged_in?
+		authenticate!
 		@bodyclass = "fridge"
 		erb :fridge, :layout => :layout
 	else
@@ -22,6 +23,7 @@ get "/" do
 	end
 end
 get "/home.json"  do
+	authenticate!
 	@users = User.all
 	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ] ) || {}
 	@notifications = current_user.notifieds(:read => false)
