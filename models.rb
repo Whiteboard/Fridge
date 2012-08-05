@@ -69,5 +69,25 @@ class Notifier
   belongs_to :notification, :key => true
 end
 
+class Client
+	include DataMapper::Resource
+	property :id,			Serial
+	property :name,			String, :length => 100
+	property :email,		String, :length => 100
+	property :keywords,		String, :length => 100
+	property :created_at, 	DateTime
+
+	has n, :timecards
+end
+class Timecard
+	include DataMapper::Resource
+	property :start,		DateTime
+	property :end,			DateTime
+	property :description,	String, :length => 1000
+	belongs_to, :user
+	belongs_to, :client
+end
+
+
 
 DataMapper.auto_upgrade!
