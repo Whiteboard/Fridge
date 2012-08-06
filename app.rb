@@ -100,8 +100,8 @@ post "/scratch" do
 		if params[:client_name].nil?
 			keywords.each do |keys|
 				keya = keys[1].split ","
-				keya.collect! { |k| k.strip }
-				if keya.any? { |w| params[:message] =~ /#{w}/ }
+				keya.collect! { |k| k.strip.downcase }
+				if keya.any? { |w| params[:message].downcase =~ /#{w}/ }
 					selectedclient = Client.first(:id => keys[0])
 					puts selectedclient.inspect
 				end
