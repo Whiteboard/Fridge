@@ -943,3 +943,8 @@ a.tldr {
   cursor: pointer;
   display: inline;
 }
+
+table {width: 90%; margin: 5%;}
+table td {text-align: left; padding: 12px; }
+table th {text-align: left; padding: 12px; font-size: 1.8em;}
+tr { border-bottom: 1px solid #ddd; }

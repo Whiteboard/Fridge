@@ -1,1 +1,27 @@
-<h3>Timecards</h3>
+<table>
+	<tr>
+		<th>Client</th>
+		<th>Description</th>
+		<th>Username</th>
+		<th>Start</th>
+		<th>End</th>
+		<th>Total Hours</th>
+	</tr>
+<% @timecards.each do |t| %>
+	<tr>
+		<td><strong><%= t.client.clientname %></strong></td>
+		<td><strong><%= t.description %></strong></td>
+		<td><%= t.user.username %></td>
+		<td><%= timeformat t.starttime %></td>
+		<td><%= timeformat t.endtime %></td>
+		<td><%= timediff(t.starttime, t.endtime) %></td>
+	</tr>
+<% end %>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Total: <%= @totalhours %></td>
+</table>

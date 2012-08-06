@@ -29,4 +29,14 @@ helpers do
 			@username = current_user
 		end
 	end
+	def timeformat(time)
+		if time.nil?
+			return 0
+		else
+			time.strftime("%m/%d/%Y at %I:%M%p")
+		end
+	end
+	def timediff(startt,endt)
+		return ((Time.parse(timeformat endt) - Time.parse(timeformat startt)) / 3600.0).precision(2)
+	end
 end

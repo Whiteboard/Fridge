@@ -1,3 +1,4 @@
+require './preconfig'
 require 'sinatra'
 require 'json'
 require 'hpricot'
@@ -7,7 +8,7 @@ require 'bcrypt'
 require 'sinatra/flash'
 enable :sessions
 require './helpers.rb'
-# DataMapper::Logger.new(STDOUT, :debug)
+DataMapper::Logger.new(STDOUT, :debug)
 require './models.rb'
 require './users_controller.rb'
 
@@ -266,4 +267,14 @@ post "/clients/create" do
 		flash[:error] = "There was an issue saving the client. Try again."
 		redirect ="/clients/new"
 	end
+end
+
+get "/timecards" do
+	@bodyclass = "external"
+	@timecards = Timecard.all(:endtime.not => nil)
+	@totalhours = 0.0
+	@timecards.each do |t|
+		@totalhours += timediff(t.starttime,t.endtime)
+	end
+	erb :timecards
 end

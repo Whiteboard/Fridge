@@ -45,14 +45,14 @@
 		<div id="session_info">
 			<% if logged_in? %>
 				<form><p>Welcome back, <%= current_user_name %> | <a href="/logout">Logout</a><p></form>
+				<nav>
+					<a href="/clients/new">Add a New Client</a>
+					<a href="/timecards">View Timecards</a>
+					<a href="/users/edit">Edit your Profile</a>
+				</nav>
 			<% else %>
 				<%= erb :login %>
 			<% end %>
-			<nav>
-				<a href="/clients/new">Add a New Client</a>
-				<a href="#">View Timecards</a>
-				<a href="/users/edit">Edit your Profile</a>
-			</nav>
 		</div>
 		<% %w[notice error warning].each do |key| %>
 <% if flash[key.to_sym] %>
