@@ -25,7 +25,7 @@ end
 get "/home.json"  do
 	authenticate!
 	@users = User.all
-	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ] ) || {}
+	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ], :id.gt => params[:later_than] ) || {}
 	@notifications = current_user.notifieds(:read => false) || {}
 	headers["Content-Type"] = "application/json"
 	"[" + @users.to_json(:exclude => [:phash, :salt], :methods => [:scratches]) + "," + @scratches.to_json(:methods => [:thoughts]) + ","+ @notifications.to_json(:methods => [:creator] ) + "," + current_user.to_json + "]"

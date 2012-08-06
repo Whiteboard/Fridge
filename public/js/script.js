@@ -6,7 +6,12 @@ var latest_scratch = 0, latest_notification = 0,
 	kLINK_DETECTION_REGEX = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
 function fetch_home(){
 	twitter();
-	$.getJSON("/home.json", function(data){
+	var latest_id = 0;
+	if ($(".scratch").length){
+		latest_id = $(".scratch").eq(0).data("index");
+	}
+	$.getJSON("/home.json", {"later_than":latest_id}, function(data){
+		console.log(data);
 		$(".relativeTime").each(function(){
 			$(this).html($.relativeTime($(this).data("date")));
 		});
