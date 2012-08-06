@@ -38,7 +38,6 @@ post "/scratch" do
 		m = params[:message]
 		url = m.match(/https?:\/\/[\S]+\.[a-zA-Z]{2,4}\.?[a-zA-Z]?{2,4}[\/\?#]?([\S]+)?/i)[0]
 		doc = Hpricot(open(url))
-		puts url
 		clly = doc.search("//section[@id='content']").inner_html.strip
 	end
 	if params[:message].include? "jsfiddle.net"
@@ -61,14 +60,11 @@ post "/scratch" do
 				nfr = Notifier.new
 				nfr.user_id = user.id
 				nfr.notification_id = n.id
-				if nfr.save
-					puts "saved a notification!"
-					return ({ :status => "success", :entry => n }).to_json
-				else
-					return ({ :status => "failure", :entry => n }).to_json
+				if !nfr.save
+					({ :status => "failure", :entry => n }).to_json
 				end
 			else
-				return ({ :status => "failure", :entry => n }).to_json
+				({ :status => "failure", :entry => n }).to_json
 			end
 		end
 	end
@@ -103,13 +99,11 @@ post "/scratch" do
 				keya.collect! { |k| k.strip.downcase }
 				if keya.any? { |w| params[:message].downcase =~ /#{w}/ }
 					selectedclient = Client.first(:id => keys[0])
-					puts selectedclient.inspect
 				end
 			end
 		else
 			selectedclient = Client.first(:clientname => :client_name)
 		end
-		puts selectedclient.inspect
 		if !selectedclient.nil?
 			tc = Timecard.new
 			tc.starttime = Time.now
@@ -155,7 +149,6 @@ post "/location" do
 	u.location = params[:location_text]
 	headers["Content-Type"] = "application/json"
 	if u.save
-		puts u.inspect
 		{:status => "success"}.to_json
 	else
 		{:status => "failure"}.to_json

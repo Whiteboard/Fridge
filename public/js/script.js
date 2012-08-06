@@ -310,7 +310,7 @@ $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);
 });
 
-// setInterval(fetch_home, 3000);
+setInterval(fetch_home, 3000);
 
 } // ending body check
 }($, window));
