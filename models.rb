@@ -20,6 +20,7 @@ class User
 	has n, :notifiers
   	has n, :notifieds, 'Notification', :through => :notifiers, :via => :notification
   	has n, :thoughts
+  	has n, :timecards
 
 	validates_presence_of :username
 	validates_presence_of :email
@@ -72,20 +73,22 @@ end
 class Client
 	include DataMapper::Resource
 	property :id,			Serial
-	property :name,			String, :length => 100
+	property :clientname,			String, :length => 100
 	property :email,		String, :length => 100
 	property :keywords,		String, :length => 100
 	property :created_at, 	DateTime
 
 	has n, :timecards
 end
+
 class Timecard
 	include DataMapper::Resource
-	property :start,		DateTime
-	property :end,			DateTime
+	property :id,			Serial
+	property :starttime,		DateTime
+	property :endtime,			DateTime
 	property :description,	String, :length => 1000
-	belongs_to, :user
-	belongs_to, :client
+	belongs_to :user
+	belongs_to :client
 end
 
 

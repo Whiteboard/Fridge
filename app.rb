@@ -84,6 +84,37 @@ post "/scratch" do
 		focus = params[:message].gsub "#focus", ""
 		u = current_user
 		u.focus = focus.strip
+		t = Timecard.first(:order => [:start.desc])
+		unless t.endtime.nil?
+			t.endtime = Time.now
+			if !t.save
+				({ :status => "failure", :entry => focus }).to_json
+			end
+		end
+		clients = Client.all
+		keywords = []
+		clients.each do |c|
+			keywords.push [c.id, c.keywords]
+		end
+		if params[:client_name].nil?
+			keywords.each do |keys|
+				keya = keys[1].split ","
+				keya.collect! { |k| k.strip }
+				if keya.any? { |w| params[:message] =~ /#{w}/ }
+					client = Client.first(:id => keys[0])
+				end
+			end
+		else
+			client = Client.first(:clientname => :client_name)
+		end
+		tc = Timecard.new
+		tc.starttime = Time.now
+		tc.description = u.focus
+		tc.user_id = current_user.id
+		tc.client_id = client.id
+		if !tc.save
+			({ :status => "failure", :entry => [tc, focus] }).to_json
+		end
 		if !u.save
 			({ :status => "failure", :entry => focus }).to_json
 		end
