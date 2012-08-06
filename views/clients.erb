@@ -1,0 +1,15 @@
+<%= erb :newclient %>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Keywords</th>
+	</tr>
+<% @clients.each do |c| %>
+	<tr>
+		<td><%= c.clientname %></td>
+		<td><%= c.email %></td>
+		<td><%= c.keywords %></td>
+	</tr>
+<% end %>
+</table>

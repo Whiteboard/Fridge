@@ -262,19 +262,26 @@ post "/clients/create" do
 	c.keywords = params[:keywords]
 	if c.save
 		flash[:notice] = "New client \"#{c.clientname}\" created successfully."
-		redirect "/"
+		redirect "/clients"
 	else
 		flash[:error] = "There was an issue saving the client. Try again."
-		redirect ="/clients/new"
+		redirect ="/clients"
 	end
 end
 
 get "/timecards" do
 	@bodyclass = "external"
 	@timecards = Timecard.all(:endtime.not => nil)
+	@currenttimecards = Timecard.all(:endtime => nil)
+	@now = Time.now
 	@totalhours = 0.0
 	@timecards.each do |t|
 		@totalhours += timediff(t.starttime,t.endtime)
 	end
 	erb :timecards
+end
+get "/clients" do
+	@bodyclass = "external"
+	@clients = Client.all
+	erb :clients
 end

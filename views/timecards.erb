@@ -7,6 +7,24 @@
 		<th>End</th>
 		<th>Total Hours</th>
 	</tr>
+<% @currenttimecards.each do |t| %>
+	<tr>
+		<td><strong><%= t.client.clientname %></strong></td>
+		<td><strong><%= t.description %></strong></td>
+		<td><%= t.user.username %></td>
+		<td><%= timeformat t.starttime %></td>
+		<td><strong><i>In progress</i></strong></td>
+		<td><%= timediff(t.starttime, @now) %></td>
+	</tr>
+<% end %>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
 <% @timecards.each do |t| %>
 	<tr>
 		<td><strong><%= t.client.clientname %></strong></td>
@@ -24,4 +42,5 @@
 		<td></td>
 		<td></td>
 		<td>Total: <%= @totalhours %></td>
+	</tr>
 </table>
