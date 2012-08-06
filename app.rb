@@ -280,6 +280,31 @@ get "/timecards" do
 	end
 	erb :timecards
 end
+get "/timecards/u/:username" do
+	@bodyclass = "external"
+	u = User.first(:username => params[:username])
+	@timecards = Timecard.all(:endtime.not => nil, :user_id => u.id)
+	@currenttimecards = Timecard.all(:endtime => nil, :user_id => u.id)
+	@now = Time.now
+	@totalhours = 0.0
+	@timecards.each do |t|
+		@totalhours += timediff(t.starttime,t.endtime)
+	end
+	erb :timecards
+end
+get "/timecards/c/:clientname" do
+	@bodyclass = "external"
+	c = Client.first(:clientname => params[:clientname])
+	@timecards = Timecard.all(:endtime.not => nil, :client_id => c.id)
+	@currenttimecards = Timecard.all(:endtime => nil, :client_id => c.id)
+	@now = Time.now
+	@totalhours = 0.0
+	@timecards.each do |t|
+		@totalhours += timediff(t.starttime,t.endtime)
+	end
+	erb :timecards
+end
+
 get "/clients" do
 	@bodyclass = "external"
 	@clients = Client.all
