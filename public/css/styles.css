@@ -829,18 +829,18 @@ form.submitting textarea {
   background: #f0edf6;
 }
 
-.login {
+.external {
   background: url(/images/light_noise_diagonal.png);
 }
 .fridge {
   background: url(/images/furley_bg.png);
 }
 
-.login form {
+.external form {
   width: 300px;
   margin: 0 auto;
 }
-.login input {
+.external input {
   display: block;
   background: #fff;
   color: #666;
@@ -851,21 +851,25 @@ form.submitting textarea {
   float: none;
   width: 100%;
 }
-.login input[type=submit]:hover {
+.external input[type=submit]:hover {
   background: #343434;
   color: #fefefe;
 }
-.login input:focus {
+.external input:focus {
   top: 0px;
   left: 0px;
 }
-.login h1 {
+.external h1 {
   text-align: center;
 }
 .flash {
   padding: 12px;
   background: #f8f0c8;
   border-bottom: 1px solid #e0d395;
+}
+.flash.error {
+  background: #f4b7ab;
+  border-bottom-color: #ae695b;
 }
 .autocomplete {
   margin: 0;

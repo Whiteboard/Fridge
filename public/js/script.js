@@ -18,7 +18,7 @@ function fetch_home(){
 		$(users).each(function(i,el){
 			if (el.logged_in){
 				if (el.id == current_user.id){
-					uhtml += '<div class="current_user user clearfix" href="#">';
+					uhtml += '<div class="current_user user clearfix" href="#"><a href="/users/edit">Edit your Profile</a>';
 				} else {
 					uhtml += '<div class="user clearfix">';
 				}
@@ -310,7 +310,7 @@ $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);
 });
 
-setInterval(fetch_home, 3000);
+// setInterval(fetch_home, 3000);
 
 } // ending body check
 }($, window));

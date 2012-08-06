@@ -1,7 +1,7 @@
 <form action="/users/edit" method="post" class="clearfix">
-	<input name="nickname" placeholder="nickname">
-	<input name="email" placeholder="email">
-	<input name="avatar_url" placeholder="Avatar url">
-	<input type="password" name="password" placeholder="password">
+	<h3>Edit your profile</h3>
+	<label>Nickname</label><input name="nickname" placeholder="nickname" value="<%= current_user.nickname %>">
+	<label>Email</label><input name="email" placeholder="email" value="<%= current_user.email %>">
+	<label>Avatar</label><input name="avatar_url" placeholder="Avatar url" value="<%= current_user.avatar_url %>">
 	<input type="submit">
 </form>

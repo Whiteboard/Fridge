@@ -73,7 +73,7 @@ end
 class Client
 	include DataMapper::Resource
 	property :id,			Serial
-	property :clientname,			String, :length => 100
+	property :clientname,	String, :length => 100
 	property :email,		String, :length => 100
 	property :keywords,		String, :length => 100
 	property :created_at, 	DateTime

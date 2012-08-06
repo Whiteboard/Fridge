@@ -48,6 +48,11 @@
 			<% else %>
 				<%= erb :login %>
 			<% end %>
+			<nav>
+				<a href="/clients/new">Add a New Client</a>
+				<a href="#">View Timecards</a>
+				<a href="/users/edit">Edit your Profile</a>
+			</nav>
 		</div>
 		<% %w[notice error warning].each do |key| %>
 <% if flash[key.to_sym] %>

@@ -7,7 +7,7 @@ require 'bcrypt'
 require 'sinatra/flash'
 enable :sessions
 require './helpers.rb'
-DataMapper::Logger.new(STDOUT, :debug)
+# DataMapper::Logger.new(STDOUT, :debug)
 require './models.rb'
 require './users_controller.rb'
 
@@ -18,7 +18,7 @@ get "/" do
 		@bodyclass = "fridge"
 		erb :fridge, :layout => :layout
 	else
-		@bodyclass = "login"
+		@bodyclass = "external"
 		erb :'users/new', :layout => :layout
 	end
 end
@@ -84,14 +84,15 @@ post "/scratch" do
 		focus = params[:message].gsub "#focus", ""
 		u = current_user
 		u.focus = focus.strip
-		t = Timecard.first(:order => [:start.desc])
-		unless t.endtime.nil?
+		t = Timecard.first(:order => [:starttime.desc])
+		unless t.nil?
 			t.endtime = Time.now
 			if !t.save
 				({ :status => "failure", :entry => focus }).to_json
 			end
 		end
 		clients = Client.all
+		selectedclient = nil
 		keywords = []
 		clients.each do |c|
 			keywords.push [c.id, c.keywords]
@@ -101,19 +102,23 @@ post "/scratch" do
 				keya = keys[1].split ","
 				keya.collect! { |k| k.strip }
 				if keya.any? { |w| params[:message] =~ /#{w}/ }
-					client = Client.first(:id => keys[0])
+					selectedclient = Client.first(:id => keys[0])
+					puts selectedclient.inspect
 				end
 			end
 		else
-			client = Client.first(:clientname => :client_name)
+			selectedclient = Client.first(:clientname => :client_name)
 		end
-		tc = Timecard.new
-		tc.starttime = Time.now
-		tc.description = u.focus
-		tc.user_id = current_user.id
-		tc.client_id = client.id
-		if !tc.save
-			({ :status => "failure", :entry => [tc, focus] }).to_json
+		puts selectedclient.inspect
+		if !selectedclient.nil?
+			tc = Timecard.new
+			tc.starttime = Time.now
+			tc.description = u.focus
+			tc.user_id = current_user.id
+			tc.client_id = selectedclient.id
+			if !tc.save
+				({ :status => "failure", :entry => [tc, focus] }).to_json
+			end
 		end
 		if !u.save
 			({ :status => "failure", :entry => focus }).to_json
@@ -125,13 +130,9 @@ post "/scratch" do
 	s.mtext = params[:message]
 	s.created_at = Time.now
 	s.user_id = current_user.id
-	puts s.inspect
-	puts s.inspect
 	if s.save
-		puts s.inspect
 		({ :status => "success", :entry => s }).to_json
 	else
-		puts s.inspect
 		({ :status => "failure", :entry => s }).to_json
 	end
 end
@@ -231,4 +232,45 @@ post "/git/deploy" do
 	s.mtext = "New commit, comrades. From: <a href='mailto:#{params[:user]}'>" + params[:user] + "</a> - <a class=\"tldr\">Details</a><p class=\"tldr\">#{params[:git_log]}</p>"
 	s.created_at = Time.now
 	s.save
+end
+
+get "/users/edit" do
+	authenticate!
+	@bodyclass = "external"
+	erb :'users/edit'
+end
+
+post "/users/edit" do
+	authenticate!
+	u = current_user
+	u.nickname = params[:nickname]
+	u.email = params[:email]
+	u.avatar_url = params[:avatar_url]
+	if u.save
+		flash[:notice] = "Successful profile update!"
+		redirect "/"
+	else
+		flash[:error] = "Try again - your profile couldn't be updated."
+		redirect "/users/edit"
+	end
+end
+
+get "/clients/new" do
+	authenticate!
+	@bodyclass = "external"
+	erb :newclient
+end
+post "/clients/create" do
+	authenticate!
+	c = Client.new
+	c.clientname = params[:clientname]
+	c.email = params[:email]
+	c.keywords = params[:keywords]
+	if c.save
+		flash[:notice] = "New client \"#{c.clientname}\" created successfully."
+		redirect "/"
+	else
+		flash[:error] = "There was an issue saving the client. Try again."
+		redirect ="/clients/new"
+	end
 end
