@@ -77,6 +77,7 @@ class Client
 	property :email,		String, :length => 100
 	property :keywords,		String, :length => 100
 	property :created_at, 	DateTime
+	property :slug,			String, :length => 100
 
 	has n, :timecards
 end

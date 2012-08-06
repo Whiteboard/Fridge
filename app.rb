@@ -258,6 +258,7 @@ post "/clients/create" do
 	authenticate!
 	c = Client.new
 	c.clientname = params[:clientname]
+	c.clientslug = slugify(c.clientname)
 	c.email = params[:email]
 	c.keywords = params[:keywords]
 	if c.save
@@ -294,7 +295,7 @@ get "/timecards/u/:username" do
 end
 get "/timecards/c/:clientname" do
 	@bodyclass = "external"
-	c = Client.first(:clientname => params[:clientname])
+	c = Client.first(:slug => params[:clientslug])
 	@timecards = Timecard.all(:endtime.not => nil, :client_id => c.id)
 	@currenttimecards = Timecard.all(:endtime => nil, :client_id => c.id)
 	@now = Time.now
