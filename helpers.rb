@@ -37,7 +37,10 @@ helpers do
 		end
 	end
 	def timediff(startt,endt)
-		return ((DateTime.parse(timeformat endt) - DateTime.parse(timeformat startt)) / 3600.0).precision(2)
+		puts timeformat startt
+		puts timeformat endt
+		puts startt.to_s
+		return ((endt.to_time.to_i - startt.to_time.to_i) / 3600.0).precision(2)
 	end
 	def slugify(s)
 		return s.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')

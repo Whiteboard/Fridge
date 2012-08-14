@@ -5,10 +5,11 @@ require 'hpricot'
 require 'open-uri'
 require 'data_mapper'
 require 'bcrypt'
+require 'date'
 require 'sinatra/flash'
 enable :sessions
 require './helpers.rb'
-DataMapper::Logger.new(STDOUT, :debug)
+# DataMapper::Logger.new(STDOUT, :debug)
 require './models.rb'
 require './users_controller.rb'
 
@@ -83,7 +84,7 @@ post "/scratch" do
 		u.focus = focus.strip
 		t = current_user.timecards.first(:order => [:starttime.desc])
 		unless t.nil?
-			t.endtime = Time.now
+			t.endtime = DateTime.now
 			if !t.save
 				({ :status => "failure", :entry => focus }).to_json
 			end
@@ -107,7 +108,7 @@ post "/scratch" do
 		end
 		if !selectedclient.nil?
 			tc = Timecard.new
-			tc.starttime = Time.now
+			tc.starttime = DateTime.now
 			tc.description = u.focus
 			tc.user_id = current_user.id
 			tc.client_id = selectedclient.id
@@ -123,7 +124,7 @@ post "/scratch" do
 	s.jsfiddle = jsfiddle || nil
 	s.clly = clly || nil
 	s.mtext = params[:message]
-	s.created_at = Time.now
+	s.created_at = DateTime.now
 	s.user_id = current_user.id
 	if s.save
 		({ :status => "success", :entry => s }).to_json
@@ -180,7 +181,7 @@ post "/scratches/:id/thoughts" do
 	t.mtext = params[:mtext]
 	t.scratch_id = params[:id]
 	t.user_id = current_user.id
-	t.created_at = Time.now
+	t.created_at = DateTime.now
 	if t.save
 		{:status => "success", :entry => t}.to_json
 	else
@@ -224,7 +225,7 @@ post "/git/deploy" do
 	u = User.first(:username => "picard")
 	s = Scratch.new(:user_id => u.id)
 	s.mtext = "New commit, comrades. From: <a href='mailto:#{params[:user]}'>" + params[:user] + "</a> - <a class=\"tldr\">Details</a><p class=\"tldr\">#{params[:git_log]}</p>"
-	s.created_at = Time.now
+	s.created_at = DateTime.now
 	s.save
 end
 
@@ -295,7 +296,7 @@ get "/timecards" do
 	@bodyclass = "external"
 	@timecards = Timecard.all(:endtime.not => nil)
 	@currenttimecards = Timecard.all(:endtime => nil)
-	@now = Time.now
+	@now = DateTime.now
 	@totalhours = 0.0
 	@timecards.each do |t|
 		@totalhours += timediff(t.starttime,t.endtime)
@@ -307,7 +308,7 @@ get "/timecards/u/:username" do
 	u = User.first(:username => params[:username])
 	@timecards = Timecard.all(:endtime.not => nil, :user_id => u.id)
 	@currenttimecards = Timecard.all(:endtime => nil, :user_id => u.id)
-	@now = Time.now
+	@now = DateTime.now
 	@totalhours = 0.0
 	@timecards.each do |t|
 		@totalhours += timediff(t.starttime,t.endtime)
@@ -319,7 +320,7 @@ get "/timecards/c/:clientname" do
 	c = Client.first(:slug => params[:clientslug])
 	@timecards = Timecard.all(:endtime.not => nil, :client_id => c.id)
 	@currenttimecards = Timecard.all(:endtime => nil, :client_id => c.id)
-	@now = Time.now
+	@now = DateTime.now
 	@totalhours = 0.0
 	@timecards.each do |t|
 		@totalhours += timediff(t.starttime,t.endtime)
