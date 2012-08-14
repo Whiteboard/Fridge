@@ -481,11 +481,11 @@ block {
   box-sizing: border-box;
 }
 h1,h2,h3,h4,h5,h6 {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: 'Source Sans Pro', sans-serif;
 }
 form input {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: normal;
 }
 body {
    font-family: "Merriweather", serif;
@@ -503,15 +503,20 @@ iframe, object {
 }
 h1 {
   background: #111;
-  padding: 30px;
+  padding: 10px;
+  text-indent: 12px;
   color: #fff;
   font-weight: 300;
   margin-top: 0;
 }
 #session_info {
-  padding: 10px 30px;
+  line-height: 30px;
+  height: 30px;
   background-color: #666;
   color: #fff;
+}
+#session_info nav {
+  margin-left: 12px;
 }
 #session_info p {
   padding: 0;
@@ -525,6 +530,13 @@ h1 {
   width: 20%;
   min-width: 200px;
   padding: 12px;
+  background: url(../images/leftbar.png);
+}
+#logout_form {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  color: #aaa;
 }
 #forms {
   display: none;
@@ -539,14 +551,21 @@ form {
   margin: 0;
 }
 form.boom_form {
-
+float: left;
 }
 form.boom_form input {
-  background: #ff9211;
+  background: #ffe5cf;
+  text-decoration: none;
+  border: 1px solid #ef6f27;
+  color: #ef6f27;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 3px;
   box-shadow: none;
-  border: none;
-  color: #fff;
-  float: none;
+  text-transform: uppercase;
+  float: left;
+  margin-right: 12px;
+  font-size: 90%;
+  padding: 2px 4px;
 }
 
 input {
@@ -556,10 +575,6 @@ input {
   font-weight: 300;
   font-size: 80%;
   letter-spacing: 0.05em;
-  box-shadow: 0 0 0 #444,
-              1px 1px 0 #444,
-              2px 2px 0 #444,
-              3px 3px 0 #444;
   right: 0px;
   border-radius: 4px;
   position: relative;
@@ -578,7 +593,7 @@ textarea {
   display: block;
   margin: 12px 0;
   width: 100%;
-  background: #fefefe;
+  background: #f8f8f8;
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 12px;
@@ -590,7 +605,7 @@ textarea:focus {
 #forms h4, #scratchboard h4 {
   padding: 0;
   padding-top: 12px;
-  margin: 0;
+  margin: 0 12px;
 }
 #scratchboard h4 span {
   font-weight: 300;
@@ -605,13 +620,13 @@ textarea:focus {
   padding: 12px;
 }
 .scratch {
-  padding: 20px 0 0;
-  border-left: 5px solid #888;
-  box-shadow: 1px 1px 3px -1px #aaa, 0 0 8px -2px #ccc, inset 0 0 10px #eee;
-  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
+  /*box-shadow: 1px 1px 3px -1px #aaa, 0 0 8px -2px #ccc, inset 0 0 10px #eee;*/
+  /*border-radius: 4px;*/
   position: relative;
   margin-bottom: 20px;
-  background: #fefefe;
+  /*background: #fefefe;*/
 }
 .scratch h5 {
   margin: 0;
@@ -626,6 +641,7 @@ textarea:focus {
   position: absolute;
   top: 0px;
   right: 0px;
+  font-family: "Source Sans Pro", sans-serif;
   content: "FOCUS";
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -643,6 +659,7 @@ textarea:focus {
   top: 0px;
   right: 0px;
   content: "LOCATION";
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 500;
   letter-spacing: 0.05em;
   font-size: 80%;
@@ -651,24 +668,27 @@ textarea:focus {
   padding: 3px;
 }
 .scratch .posted_by {
-  margin-right: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 32px;
   padding: 4px;
   display: block;
-  text-align: center;
-  max-width: 120px;
-  width: 20%;
-  max-height: 150px;
+  text-align: left;
+  line-height: 40px;
+}
+.scratch .posted_by .relativeTime {
+  margin-left: 20px;
 }
 .scratch .scratch_content {
   min-width: 364px;
-  width: 75%;
+  width: 100%;
   max-width: 636px;
 }
-.scratch .posted_by img {
-  width: 70px;
-  max-height: 70px;
-  border-radius: 70px;
+.scratch .posted_by .scratch_avatar {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: cover;
+  float: left;
+  margin-right: 12px;
 }
 .scratch img {
   max-width: 100%;
@@ -760,13 +780,23 @@ textarea:focus {
 #focus {
   color: #ffb58d;
 }
-
+#twitter_h2 {
+  color: #3cc1ec;
+}
 .tweet {
-  border-bottom: 1px solid #c2e3ec;
+  /*border-bottom: 1px solid #c2e3ec;*/
   padding: 6px;
-  background-color: #e2f9ff;
+  margin-bottom: 12px;
+  /*background-color: #e2f9ff;*/
+}
+.tweet>a:first-child {
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Source Sans Pro", sans-serif;
 }
 .tweet p {
+  color: #6b6b6b;
+  font-size: 90%;
   margin: 0;
   padding: 0;
 }
@@ -793,46 +823,60 @@ textarea:focus {
 form.submitting textarea {
   color: #777;
 }
-
+.thoughts {
+  width: 90%;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 20px 0 20px 10%;
+  box-sizing: border-box;
+}
 .thought {
   display: block;
   width: 100%;
-  padding: 12px;
-  background: #f4f0fb;
-  border-top: 1px solid #e8dcfc;
+  padding: 6px 12px;
+  float: right;
+  border-left: 3px solid #aaa;
 }
 .thought p {
   margin: 3px 0;
 }
 .thought_by {
-  width: 20%;
-  max-width: 100px;
-  float: left;
+  width: 100%;
+  font-weight: bold;
 }
 .thought_text {
-  width: 80%;
-  max-width: 570px;
-  margin-left: 20px;
-  float: left;
+}
+.thought_text .relativeTime {
+  font-size: 80%;
+  font-style: italic;
 }
 .thought_link {
-  margin: 0;
-  padding: 12px;
-  display: block;
-  background: #FBF4FF;
+  background: #ddd;
+  text-decoration: none;
+  border: 1px solid #aaa;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 3px;
+  text-transform: uppercase;
+  float: left;
+  margin-right: 12px;
+  font-size: 90%;
+  padding: 2px 4px;
 }
 .thought_form {
   display: none;
 }
 .thought_form textarea {
-  background: #f0edf6;
+  background: #fff;
+  border: 1px solid #aaa;
+}
+.thought_form input[type=submit] {
+  text-transform: uppercase;
 }
 
 .external {
   background: url(/images/light_noise_diagonal.png);
 }
 .fridge {
-  background: url(/images/furley_bg.png);
+  /*background: url(/images/furley_bg.png);*/
 }
 
 .external form {

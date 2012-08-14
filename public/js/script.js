@@ -56,17 +56,17 @@ function fetch_home(){
 					shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
 				}
 				shtml += "<div class='clearfix'>";
-				shtml += '<span class="posted_by floatleft"><img src="'+user.avatar_url+'"><br><b>' + user.username + '</b></span>';
+				shtml += '<span class="posted_by"><div style="background-image:url('+user.avatar_url+');" class="scratch_avatar"></div><b>' + user.username + '</b><small><i class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</i></small></span>';
 				shtml += '<div class="floatleft scratch_content">';
 				shtml += '<div class="mtext">'+ replaceLinks(el.mtext) + '</div>';
 				shtml += '<p class="boomcount" id="boomcount-for-'+el.id+'">' + el.boomcount + " Booms</p>";
-				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += (el.clly) ? el.clly : "";
 				shtml += (el.jsfiddle) ? el.jsfiddle : "";
-				shtml += '<br><small><i class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</i></small></div></div>';
-				shtml += '<h5>Thoughts:</h5><div class="thoughts clearfix" id="thoughts-for-'+ el.id +'">';
+				shtml += '</div></div>';
+				shtml += '<div class="thoughts clearfix" id="thoughts-for-'+ el.id +'">';
 				shtml += '</div>'
-				shtml += '<a href="#" class="thought_link">Post a thought</a>';
+				shtml += '<a href="#" class="thought_link">Reply</a>';
+				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
 				shtml += '<form class="thought_form" action="/scratches/' + el.id + '/thoughts" method="POST">';
 				shtml += '<textarea name="mtext">A thought...</textarea>';
 				shtml += '<input type="submit" value="post">';
@@ -109,7 +109,7 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
 	var f = $(this);
 	if (f.hasClass("boom_form")){
-				var curbc = parseInt(f.siblings(".boomcount").html().split(" ")[0]);
+				var curbc = parseInt(f.parents(".scratch").find(".boomcount").html().split(" ")[0]);
 				curbc++;
 				f.siblings(".boomcount").html(curbc + " Booms");
 			}
