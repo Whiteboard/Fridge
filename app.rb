@@ -81,7 +81,7 @@ post "/scratch" do
 		focus = params[:message].gsub "#focus", ""
 		u = current_user
 		u.focus = focus.strip
-		t = Timecard.first(:order => [:starttime.desc])
+		t = current_user.timecards.first(:order => [:starttime.desc])
 		unless t.nil?
 			t.endtime = Time.now
 			if !t.save
@@ -103,7 +103,7 @@ post "/scratch" do
 				end
 			end
 		else
-			selectedclient = Client.first(:clientname => :client_name)
+			selectedclient = Client.first(:clientname => params[:client_name])
 		end
 		if !selectedclient.nil?
 			tc = Timecard.new
@@ -254,6 +254,12 @@ get "/clients/new" do
 	@bodyclass = "external"
 	erb :newclient
 end
+get "/clients/:id" do
+	authenticate!
+	@client = Client.first(:id => params[:id])
+	@bodyclass = "external"
+	erb :editclient
+end
 post "/clients/create" do
 	authenticate!
 	c = Client.new
@@ -263,6 +269,21 @@ post "/clients/create" do
 	c.keywords = params[:keywords]
 	if c.save
 		flash[:notice] = "New client \"#{c.clientname}\" created successfully."
+		redirect "/clients"
+	else
+		flash[:error] = "There was an issue saving the client. Try again."
+		redirect ="/clients"
+	end
+end
+post "/clients/edit" do
+	authenticate!
+	c = Client.first(:id => params[:client_id])
+	c.clientname = params[:clientname]
+	c.clientslug = slugify(c.clientname)
+	c.email = params[:email]
+	c.keywords = params[:keywords]
+	if c.save
+		flash[:notice] = "Client \"#{c.clientname}\" updated successfully."
 		redirect "/clients"
 	else
 		flash[:error] = "There was an issue saving the client. Try again."

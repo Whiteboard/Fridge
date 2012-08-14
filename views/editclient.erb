@@ -1,0 +1,8 @@
+<form action="/clients/edit" method="post">
+	<h4>Edit Client</h4>
+<input name="client_id" type="hidden" value="<%= @client.id %>">
+<input name="clientname" placeholder="Client name" value="<%= @client.clientname %>">
+<input name="email" placeholder="Client email" value="<%= @client.email %>">
+<input name="keywords" placeholder="Keywords" value="<%= @client.keywords %>">
+<input type="submit">
+</form>
