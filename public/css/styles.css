@@ -702,6 +702,7 @@ textarea:focus {
 #rightbar {
   float: right;
   padding: 12px;
+  padding-top: 0;
   width: 108px;
   -webkit-transition: width 0.2s linear;
   overflow: hidden;
