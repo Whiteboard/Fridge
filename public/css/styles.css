@@ -640,38 +640,30 @@ textarea:focus {
   background: ;
 }
 .scratch.focus {
-  background-color: #fff0e4;
-  border-left-color: #ac6831;
+  background-color: #eaf5fb;
 }
 .scratch.focus:before {
   position: absolute;
   top: 0px;
   right: 0px;
-  font-family: "Source Sans Pro", sans-serif;
-  content: "FOCUS";
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  font-size: 80%;
-  color: #fde1c0;
-  background-color: #b15918;
-  padding: 3px;
+  width: 16px;
+  padding: 4px;
+  height: 16px;
+  content: "";
+  background: url(../images/focus-icon.png) center no-repeat;
 }
 .scratch.location {
-  background-color: #fffae4;
-  border-left-color: #a9953f;
+  background-color: #fcf4f0;
 }
 .scratch.location:before {
   position: absolute;
   top: 0px;
   right: 0px;
-  content: "LOCATION";
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  font-size: 80%;
-  color: #c2b845;
-  background-color: #efe468;
-  padding: 3px;
+  width: 16px;
+  padding: 4px;
+  height: 16px;
+  content: "";
+  background: url(../images/location-icon.png) center no-repeat;
 }
 .scratch .posted_by {
   margin-bottom: 32px;
