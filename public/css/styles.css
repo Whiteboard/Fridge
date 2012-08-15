@@ -799,6 +799,9 @@ textarea:focus {
     color: #666;
     font-size: 80%;
   }
+  .meta .email, .meta .focus {
+    margin-top: 4px;
+  }
   .meta .focus:before {
     display: block;
     width: 16px;
