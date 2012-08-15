@@ -33,7 +33,7 @@
 
 
 <script id="user_scratches" type="text/x-handlebars-template">
-			{{{#each scratches}}}
+			{{#each scratches}}
 				<div class='scratch clearfix {{{scratchclass this}}}' data-index="{{{this.id}}}">
 				<div class='clearfix'>
 				<span class="posted_by"><div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b><small><i class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}} </i></small></span>
@@ -55,10 +55,10 @@
 				<input type="submit" value="post">
 				</form>
 				</div>
-			{{{/each}}}
+			{{/each}}
 		</script>
 <script id="users_template" type="text/x-handlebars-template">
-	{{{#with current_user}}}
+	{{#with current_user}}
 	<div class="current_user user clearfix" href="#"><a href="/users/edit">Edit your Profile</a>
 		<div class="avatar" style="background:url({{{this.avatar_url}}}) center; background-size:cover;"></div>
 		<div class="meta">
@@ -69,8 +69,8 @@
 				<p class="email"><a target="_blank" href="mailto:{{{email}}}">Email</a></p>
 		</div>
 	</div>
-	{{{/with}}}
-	{{{#each users}}}
+	{{/with}}
+	{{#each users}}
 	<div class="user clearfix">
 		<div class="avatar" style="background:url({{{this.avatar_url}}}) center; background-size:cover;"></div>
 		<div class="meta">
@@ -81,5 +81,5 @@
 				<p class="email"><a target="_blank" href="mailto:{{{email}}}">Email</a></p>
 		</div>
 	</div>
-	{{{/each}}}
+	{{/each}}
 </script>
