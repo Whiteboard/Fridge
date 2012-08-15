@@ -39,12 +39,12 @@
 				<span class="posted_by"><div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b><small><i class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}} </i></small></span>
 				<div class="floatleft scratch_content">
 				<div class="mtext">{{{replacelinks this.mtext }}}</div>
-				{{{#if this.clly }}}
-					this.clly
-				{{{/if}}}
-				{{{#if this.jsfiddle }}}
-					this.jsfiddle
-				{{{/if}}}
+				{{#if this.clly }}
+					{{{this.clly}}}
+				{{/if}}
+				{{#if this.jsfiddle }}
+					{{{this.jsfiddle}}}
+				{{/if}}
 				</div></div>
 				<div class="thoughts clearfix" id="thoughts-for-{{{this.id}}}">
 				</div>
