@@ -1,5 +1,37 @@
 (function(jQuery, window, undefined){
 
+
+
+Handlebars.registerHelper('replacelinks', function(text) {
+  return replaceLinks(text);
+});
+Handlebars.registerHelper('username', function(scratch,users) {
+	for (var i = 0; i < users.length; i++){
+		if (users[i].id == scratch.user_id){
+			return users[i].username;
+		}
+	}
+});
+Handlebars.registerHelper('relativeTime', function(time) {
+	return $.relativeTime(time);
+});
+Handlebars.registerHelper('scratchclass', function(scratch) {
+	if (scratch.mtext.indexOf("#focus")>=0){
+		return "focus";
+	}
+	if (scratch.mtext.indexOf("#location")>=0){
+		return "location";
+	}
+});
+Handlebars.registerHelper('avatar_url', function(scratch, users) {
+	for (var i = 0; i < users.length; i++){
+		if (users[i].id == scratch.user_id){
+			return users[i].avatar_url;
+		}
+	}
+});
+
+
 if ($("body").hasClass("fridge")){
 
 var latest_scratch = 0, latest_notification = 0,
@@ -11,7 +43,6 @@ function fetch_home(){
 		latest_id = $(".scratch").eq(0).data("index");
 	}
 	$.getJSON("/home.json", {"later_than":latest_id}, function(data){
-		console.log(data);
 		$(".relativeTime").each(function(){
 			$(this).html($.relativeTime($(this).data("date")));
 		});
@@ -20,60 +51,39 @@ function fetch_home(){
 			notifications = data[2],
 			current_user = data[3],
 			uhtml = "";
+		var ucontext = {
+			users : []
+		};
 		$(users).each(function(i,el){
 			if (el.logged_in){
 				if (el.id == current_user.id){
-					uhtml += '<div class="current_user user clearfix" href="#"><a href="/users/edit">Edit your Profile</a>';
+					ucontext.current_user = el;
 				} else {
-					uhtml += '<div class="user clearfix">';
+					ucontext.users.push(el);
 				}
-				uhtml += '<div class="avatar" style="background:url('+el.avatar_url+') center; background-size:cover;"></div><div class="meta">';
-				uhtml += '<p class="username"><a>'+el.username+'</a></p>';
-				uhtml += '<p class="nickname">"'+el.nickname+'\"</p>';
-				uhtml += '<p class="focus">Focus: '+ replaceLinks(el.focus)+'</p>';
-				uhtml += '<p class="location">Location: '+ replaceLinks(el.location) +'</p>';
-				uhtml += '<p class="email"><a target="_blank" href="mailto:'+el.email+'">Email</a></p>';
-				uhtml += '</div></div>';
 			}
 		});
+		var usource   = $("#users_template").html();
+		var utemplate = Handlebars.compile(usource);
+		var uhtml     = utemplate(ucontext);
 		if ($("#users").html() != uhtml){
 			$("#users").html(uhtml);
 		}
 		if ($("#focus").html() != current_user.focus){
 			$("#focus").html(current_user.focus);
 		}
-		var shtml = "";
+		var scontext = {
+				scratches : [],
+				users : users
+			}
 		$(scratches).each(function(i,el){
 			if (el.id > latest_scratch) {
-				var user = $(users).filter(function(i){
-					return this.id == el.user_id;
-				})[0];
-				if (el.mtext.indexOf("#focus") >= 0){
-					shtml += '<div class="scratch focus clearfix" data-index="' + el.id + '">';
-				} else if (el.mtext.indexOf("#location") >= 0){
-					shtml += '<div class="scratch location clearfix" data-index="' + el.id + '">';
-				} else {
-					shtml += '<div class="scratch clearfix" data-index="' + el.id + '">';
-				}
-				shtml += "<div class='clearfix'>";
-				shtml += '<span class="posted_by"><div style="background-image:url('+user.avatar_url+');" class="scratch_avatar"></div><b>' + user.username + '</b><small><i class="relativeTime" data-date="'+el.created_at+'">'+$.relativeTime(el.created_at)+'</i></small></span>';
-				shtml += '<div class="floatleft scratch_content">';
-				shtml += '<div class="mtext">'+ replaceLinks(el.mtext) + '</div>';
-				shtml += '<p class="boomcount" id="boomcount-for-'+el.id+'">' + el.boomcount + " Booms</p>";
-				shtml += (el.clly) ? el.clly : "";
-				shtml += (el.jsfiddle) ? el.jsfiddle : "";
-				shtml += '</div></div>';
-				shtml += '<div class="thoughts clearfix" id="thoughts-for-'+ el.id +'">';
-				shtml += '</div>'
-				shtml += '<a href="#" class="thought_link">Reply</a>';
-				shtml += '<form class="boom_form" action="/scratch/' + el.id + '/boom" method="post"><input type="submit" value="BOOM!"></form>';
-				shtml += '<form class="thought_form" action="/scratches/' + el.id + '/thoughts" method="POST">';
-				shtml += '<textarea name="mtext">A thought...</textarea>';
-				shtml += '<input type="submit" value="post">';
-				shtml += '</form>';
-				shtml += '</div>';
+				scontext.scratches.push(el);
 			}
 		});
+		var ssource   = $("#user_scratches").html();
+		var stemplate = Handlebars.compile(ssource);
+		var shtml    = stemplate(scontext);
 		if ($("#scratches").html() != shtml){
 			$("#scratches").prepend(shtml);
 			latest_scratch = parseInt($(".scratch").eq(0).data("index"));
@@ -109,12 +119,11 @@ $("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
 	var f = $(this);
 	if (f.hasClass("boom_form")){
-				var curbc = parseInt(f.parents(".scratch").find(".boomcount").html().split(" ")[0]);
+				var curbc = parseInt(f.parents(".scratch").find(".boomcount").html());
 				curbc++;
-				f.siblings(".boomcount").html(curbc + " Booms");
+				f.siblings(".boomcount").html(curbc);
 			}
 	$.post(f.attr("action"), f.serialize(), function(data){
-		console.log(data);
 		if (data.status == "success"){
 			fetch_home();
 			f.find("textarea").val("Success!");
@@ -235,8 +244,8 @@ function getBooms(){
 	});
 	$.getJSON("/booms/" + ids.join(","), function(data){
 		$(data).each(function(i,el){
-			if ($("#boomcount-for-" + el.id).html() != el.boomcount + " Booms"){
-				$("#boomcount-for-" + el.id).html(el.boomcount + " Booms");
+			if ($("#boomcount-for-" + el.id).html() != el.boomcount){
+				$("#boomcount-for-" + el.id).html(el.boomcount);
 			}
 		});
 	});
@@ -298,15 +307,6 @@ function autoComplete(value){
 	});
 	return;
 }
-function replaceLinks(s){
-	if (s){
-		if (!(s.indexOf("iframe") >= 0) && !(s.indexOf("<a") >= 0)){
-			return s.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
-		} else {
-			return s;
-		}
-	}
-}
 
 $("#rightbar").on("mouseenter", function(e){
 	$(this).toggleClass("open");
@@ -317,5 +317,17 @@ $("body").on("click", "a.tldr", function(){
 
 setInterval(fetch_home, 3000);
 
+
+
+
+function replaceLinks(s){
+	if (s){
+		if (!(s.indexOf("iframe") >= 0) && !(s.indexOf("<a") >= 0)){
+			return s.replace(kLINK_DETECTION_REGEX, '<a href="$1" target="_blank">$1</a>');
+		} else {
+			return s;
+		}
+	}
+}
 } // ending body check
 }($, window));

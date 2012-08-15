@@ -547,12 +547,22 @@ form {
 }
 
 .boomcount {
-  font-size: 0.8em;
   text-transform: uppercase;
   margin: 0;
+  background: #ffe5cf;
+  text-decoration: none;
+  border: 1px solid #ef6f27;
+  border-left: 0;
+  color: #ef6f27;
+  font-family: 'Source Sans Pro', sans-serif;
+  box-shadow: none;
+  text-transform: uppercase;
+  float: left;
+  font-size: 90%;
+  padding: 2px 6px;
 }
 form.boom_form {
-float: left;
+  float: left;
 }
 form.boom_form input {
   background: #ffe5cf;
@@ -560,11 +570,9 @@ form.boom_form input {
   border: 1px solid #ef6f27;
   color: #ef6f27;
   font-family: 'Source Sans Pro', sans-serif;
-  border-radius: 3px;
   box-shadow: none;
   text-transform: uppercase;
   float: left;
-  margin-right: 12px;
   font-size: 90%;
   padding: 2px 4px;
 }
@@ -577,7 +585,6 @@ input {
   font-size: 80%;
   letter-spacing: 0.05em;
   right: 0px;
-  border-radius: 4px;
   position: relative;
   float: right;
 }
@@ -586,8 +593,6 @@ input:hover{
   color: #444;
 }
 input:active {
-  top: 3px;
-  left: 3px;
   box-shadow: none;
 }
 textarea {
@@ -825,9 +830,9 @@ form.submitting textarea {
   color: #777;
 }
 .thoughts {
-  width: 90%;
+  border-left: 3px solid #aaa;
   font-family: 'Source Sans Pro', sans-serif;
-  margin: 20px 0 20px 10%;
+  margin: 20px 0 20px;
   box-sizing: border-box;
 }
 .thought {
@@ -835,7 +840,6 @@ form.submitting textarea {
   width: 100%;
   padding: 6px 12px;
   float: right;
-  border-left: 3px solid #aaa;
 }
 .thought p {
   margin: 3px 0;
