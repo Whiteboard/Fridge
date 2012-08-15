@@ -722,7 +722,7 @@ textarea:focus {
   min-height: 110px;
 }
 .user p {
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   padding: 0;
 }
 #users .user.current_user {
