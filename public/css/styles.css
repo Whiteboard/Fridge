@@ -711,8 +711,7 @@ textarea:focus {
   -webkit-transition: width 0.2s linear;
 }
 #users .user {
-  background: #efefef;
-  border-radius: 4px;
+  font-family: "Source Sans Pro", sans-serif;
   padding: 12px;
   float: left;
   width: 100%;
@@ -722,11 +721,12 @@ textarea:focus {
   min-height: 110px;
 }
 .user p {
-  margin: 0;
+  margin: 20px 0 0;
   padding: 0;
+  height: 30px;
 }
 #users .user.current_user {
-  background: #cdecb9;
+  /*background: #cdecb9;*/
 }
 #users .user.current_user:before {
   content: "This is you.";
@@ -738,10 +738,7 @@ textarea:focus {
   color: #999;
   padding: 2px 3px;
 }
-#users .user:hover {
-  background: #dedede;
-}
-#users img {
+/*#users img {
   max-width: 100%;
   margin-right: 20px;
   display: block;
@@ -756,8 +753,20 @@ textarea:focus {
   height: 70px;
   top: 8px;
   position: relative;
+}*/
+.user:nth-child(even) {
+  background:#363a3d;
 }
-  #users .avatar:after {
+.user:nth-child(odd) {
+  background:#1d1f21;
+}
+.user a {
+  color: #dedede;
+}
+.user {
+  color: #efefef;
+}
+/*  #users .avatar:after {
     display: block;
     position: absolute;
     top: 0px;
@@ -767,9 +776,13 @@ textarea:focus {
     border-radius: 100px;
     box-shadow: inset 0 0 10px #000;
     content: "";
-  }
+  }*/
 #users .username {
   font-weight: bold;
+  font-size: 120%;
+  position: relative;
+  left: -16px;
+  margin: 0;
 }
 #users .username:before {
   content: "@";
@@ -777,9 +790,33 @@ textarea:focus {
 }
 #users .meta {
   float: left;
-  width: 65%;
+  padding-left: 20px;
   min-width: 180px;
+  position: relative;
 }
+  .meta span {
+    display: block;
+    color: #666;
+    font-size: 80%;
+  }
+  .meta .focus:before {
+    display: block;
+    width: 16px;
+    height: 30px;
+    content: "";
+    background: url(../images/focus-icon.png) no-repeat center;
+    position: absolute;
+    left: 0px;
+  }
+  .meta .location:before {
+    display: block;
+    width: 16px;
+    height: 30px;
+    content: "";
+    position: absolute;
+    left: 0px;
+    background: url(../images/location-icon.png) no-repeat center;
+  }
 #users p {
   
 }
