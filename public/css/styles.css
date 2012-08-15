@@ -857,7 +857,7 @@ form.submitting textarea {
 .thought_link {
   background: #ddd;
   text-decoration: none;
-  border: 1px solid #aaa;
+  border: 1px solid #bababa;
   font-family: 'Source Sans Pro', sans-serif;
   border-radius: 3px;
   text-transform: uppercase;
@@ -865,6 +865,7 @@ form.submitting textarea {
   margin-right: 12px;
   font-size: 90%;
   padding: 2px 4px;
+  color: #bababa;
 }
 .thought_form {
   display: none;
