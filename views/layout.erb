@@ -41,18 +41,18 @@
 		<form id="logout_form"><p>Welcome back, <%= current_user_name %> | <a href="/logout">Logout</a><p></form>
 		<% end %>
 <h1>The Fridge</h1>
-		<div id="session_info" class="clearfix">
 			<% if logged_in? %>
+			<div id="session_info" class="clearfix">
 				<nav class="floatleft">
 					<a href="/">Fridge</a>
 					<a href="/clients/new">Add a New Client</a>
 					<a href="/timecards">View Timecards</a>
 					<a href="/users/edit">Edit your Profile</a>
 				</nav>
+			</div>
 			<% else %>
 				<%= erb :login %>
 			<% end %>
-		</div>
 		<% %w[notice error warning].each do |key| %>
 <% if flash[key.to_sym] %>
     <div id="<%= key %>" class="flash">
