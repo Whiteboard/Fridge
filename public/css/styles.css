@@ -79,7 +79,6 @@ textarea {
  */
 body {
   margin: 0;
-  background: #fff;
 }
 /* ==========================================================================
    Links
@@ -492,6 +491,7 @@ body {
    font-family: "Merriweather", serif;
    font-size: 14px;
    color: #444;
+   background-color: #fff;
    font-weight: 400;
 }
 .fridge #container {
