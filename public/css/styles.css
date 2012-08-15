@@ -724,7 +724,6 @@ textarea:focus {
 .user p {
   margin: 20px 0 0;
   padding: 0;
-  height: 30px;
 }
 #users .user.current_user {
   /*background: #cdecb9;*/
@@ -791,10 +790,12 @@ textarea:focus {
 }
 #users .meta {
   float: left;
-  padding-left: 20px;
   min-width: 180px;
   position: relative;
 }
+  .meta p {
+    padding-left: 20px;
+  }
   .meta span {
     display: block;
     color: #666;
@@ -803,23 +804,11 @@ textarea:focus {
   .meta .email, .meta .focus {
     margin-top: 4px;
   }
-  .meta .focus:before {
-    display: block;
-    width: 16px;
-    height: 30px;
-    content: "";
-    background: url(../images/focus-icon.png) no-repeat center;
-    position: absolute;
-    left: 0px;
+  .meta .focus {
+    background: url(../images/focus-icon.png) no-repeat left center;
   }
-  .meta .location:before {
-    display: block;
-    width: 16px;
-    height: 30px;
-    content: "";
-    position: absolute;
-    left: 0px;
-    background: url(../images/location-icon.png) no-repeat center;
+  .meta .location {
+    background: url(../images/location-icon.png) no-repeat left center;
   }
 #users p {
   
