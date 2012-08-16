@@ -450,6 +450,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.relative {
+  position: relative;
+}
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -708,17 +711,48 @@ textarea:focus {
 #rightbar {
   float: right;
   padding: 12px;
-  padding-top: 0;
   width: 108px;
   -webkit-transition: width 0.2s linear;
   /*overflow: hidden;*/
   position: relative;
 }
+#rightbar input {
+  width: 100%;
+}
+  #search {}
+  .exit_search {
+    font-weight: lighter;
+    background: #dedede;
+    border: 1px solid #ccc;
+    color: #999;
+    padding: 2px;
+    font-size: 70%;
+    margin-left:10px;
+    padding-left: 20px;
+    position: relative;
+  }
+  .exit_search:before {
+    content: "✖";
+    padding: 2px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #ccc;
+  }
+  #scratchboard_h2 small {
+    font-weight: lighter;
+  }
+  .exit_search:hover {
+    background: #efefef;
+    border: 1px solid #aaa;
+    color: #666;
+    cursor: pointer;
+  }
   .right_drawer_handle {
     display: block;
     position: absolute;
     top: 0px;
-    left: -16px;
+    left: -28px;
     padding: 12px;
     padding: 4px;
     background-color: rgba(40,40,40,0.8);

@@ -134,6 +134,15 @@ post "/scratch" do
 	end
 end
 
+post "/search" do
+	headers["Content-Type"] = "application/json"
+	status 200
+	q = params[:query]
+	s = Scratch.all(:conditions => [ "mtext ILIKE ?", "%#{q}%" ], :order => [:created_at.desc ]) + User.all(:conditions => [ "username ILIKE ?", "%#{q}%"]).scratches(:order => [:created_at.desc ])
+	u = User.all
+	{:scratches => s, :users => u}.to_json
+end
+
 post "/focus" do
 	authenticate!
 	u = current_user
@@ -211,7 +220,6 @@ get "/lazy" do
 	users = User.all
 	{:news => news, :users => users}.to_json
 end
-
 
 get "/usernames.json" do
 	authenticate!

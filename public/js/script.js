@@ -115,7 +115,7 @@ function fetch_home(){
 }
 fetch_home();
 
-$("#rightbar, #leftbar, #scratchboard").on("submit", "form", function(e){
+$("#leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
 	var f = $(this);
 	if (f.hasClass("boom_form")){
@@ -331,6 +331,34 @@ function autoComplete(value){
 	return;
 }
 
+$("#search").on("submit", function(e){
+	e.preventDefault();
+	var v = $(this).find("input").val();
+	$.post("/search", { query : v }, function(data){
+		var scontext = {
+			scratches : data.scratches,
+			users : data.users
+		}
+		var ssource   = $("#user_scratches").html();
+		var stemplate = Handlebars.compile(ssource);
+		var shtml    = stemplate(scontext);
+		if ($("#scratches").html() != shtml){
+			$("#scratches").html(shtml);
+			clearInterval(interval);
+		}
+		var h2text = $("#scratchboard_h2").text();
+		$("#scratchboard_h2").html(h2text + " | <small>Search for " + v + " <a class='exit_search'>Cancel</a></small>");
+		$(".more_scratches").hide();
+		$(".exit_search").show().on("click", function(){
+			$("#scratches").empty();
+			$("#scratchboard_h2").html(h2text);
+			fetch_home();
+			interval = setInterval(fetch_home, 3000);
+			$(".exit_search").off("click");
+		});
+	}, "json");
+});
+
 $(".right_drawer_handle").on("click", function(e){
 	$("#rightbar").toggleClass("open");
 });
@@ -338,7 +366,7 @@ $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);
 });
 
-setInterval(fetch_home, 3000);
+var interval = setInterval(fetch_home, 3000);
 
 
 

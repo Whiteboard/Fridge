@@ -5,7 +5,7 @@
 	<div id="notifications"></div>
 </sidebar>
 <div id="scratchboard">
-	<h2>Scratchboard</h2>
+	<h2 id="scratchboard_h2">Scratchboard</h2>
 	<form action="/scratch" method="POST" class="clearfix">
 		<h4><span>#focus</span> <span>#location</span></h4>
 		<textarea name="message">Post a scratch.</textarea>
@@ -16,20 +16,13 @@
 	<a class="more_scratches">More Scratches</a>
 </div>
 <sidebar id="rightbar">
-	<a href="#" class="right_drawer_handle"><span></span></a>
-	<div id="forms">
-		<form action="/focus" method="POST" id="focus_form" class="clearfix">
-			<h4>Focus</h4>
-			<textarea name="focus_text">Post your current focus.</textarea>
-			<input type="submit" value="Post">
-		</form>
-		<form action="/location" method="POST" class="clearfix">
-			<h4>Location</h4>
-			<textarea name="location_text">Post your current location.</textarea>
-			<input type="submit" value="Post">
-		</form>
+	<form class="clearfix" id="search" action="GET">
+		<input name="search" placeholder="search">
+	</form>
+	<div class="relative clearfix">
+		<a href="#" class="right_drawer_handle"><span></span></a>
+		<div id="users" class="clearfix"></div>
 	</div>
-	<div id="users" class="clearfix"></div>
 </sidebar>
 
 
