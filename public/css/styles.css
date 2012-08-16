@@ -521,12 +521,19 @@ h1 {
 }
 #session_info nav {
   margin-left: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+#session_info nav a {
+  margin-left: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+  text-decoration: none;
 }
 #session_info p {
   padding: 0;
   margin: 0;
 }
 #session_info a {
+  margin-right: 12px;
   color: #ededed;
 }
 #leftbar {
