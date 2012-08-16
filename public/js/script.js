@@ -331,8 +331,8 @@ function autoComplete(value){
 	return;
 }
 
-$("#rightbar").on("mouseenter", function(e){
-	$(this).toggleClass("open");
+$(".right_drawer_handle").on("click", function(e){
+	$("#rightbar").toggleClass("open");
 });
 $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);
