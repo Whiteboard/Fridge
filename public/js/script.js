@@ -254,6 +254,29 @@ $("#scratchboard").on("click", ".thought_link", function(e){
 	e.preventDefault();
 	$(this).hide().siblings("form").show().find("textarea").focus();
 });
+function moreScratches(){
+	var lowestId = Infinity;
+	$(".scratch").each(function(){
+		lowestId = Math.min($(this).data("index"),lowestId);
+	});
+
+	$.getJSON("/lazy", { lt : lowestId }, function(data){
+		console.log(data);
+		var scontext = {
+			scratches : data.news,
+			users : data.users
+		}
+		console.log(scontext);
+		var ssource   = $("#user_scratches").html();
+		var stemplate = Handlebars.compile(ssource);
+		var shtml    = stemplate(scontext);
+		$("#scratches").append(shtml);
+		if ($(".scratch[data-index='1']").length){
+			$(".more_scratches").remove();
+		}
+	});
+}
+$(".more_scratches").on("click", moreScratches);
 
 setTimeout(function(){
 	$(".flash").slideUp(function(){$(".flash").remove()});

@@ -204,6 +204,13 @@ get "/booms/:ids" do
 	update_scratches = Scratch.all(:id => ids, :boomcount.gt => 0)
 	update_scratches.to_json(:methods => [:user])
 end
+get "/lazy" do
+	headers["Content-Type"] = "application/json"
+	lt = params[:lt]
+	news = Scratch.all(:id.lt => lt, :limit => 20, :order => [:created_at.desc ])
+	users = User.all
+	{:news => news, :users => users}.to_json
+end
 
 
 get "/usernames.json" do

@@ -691,6 +691,20 @@ textarea:focus {
 .scratch img {
   max-width: 100%;
 }
+.more_scratches {
+  display: block;
+  text-align: center;
+  padding: 3px 0;
+  background: #dedede;
+  border: 1px solid #ccc;
+  color: #999;
+}
+.more_scratches:hover {
+  background: #efefef;
+  border: 1px solid #aaa;
+  color: #888;
+  cursor: pointer;
+}
 #rightbar {
   float: right;
   padding: 12px;
