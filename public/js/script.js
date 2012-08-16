@@ -337,6 +337,7 @@ function autoComplete(value){
 
 $("#search").on("submit", function(e){
 	e.preventDefault();
+	$(".exit_search").trigger('click');
 	var v = $(this).find("input").val();
 	$.post("/search", { query : v }, function(data){
 		var scontext = {
