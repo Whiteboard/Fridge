@@ -4,12 +4,12 @@ class User
 	include DataMapper::Resource
 
 	property :id,         	Serial    # An auto-increment integer key
-	property :username, 	String
-	property :email, 		String
+	property :username, 	String, :format => /\S/
+	property :email, 		String, :format => :email
 	property :nickname,		String
 	property :phash,		String, :length => 120 # password hash
 	property :salt,			String, :length => 120 # pass salt
-	property :avatar_url,	String, :length => 120 # password hash
+	property :avatar_url,	String, :length => 120, :format => :url, :required => true
 	property :focus,		Text
 	property :location,		Text
 	property :logged_in,	Boolean
