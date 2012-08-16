@@ -117,6 +117,7 @@ fetch_home();
 
 $("#leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
+	$(".exit_search").trigger("click");
 	var f = $(this);
 	if (f.hasClass("boom_form")){
 				var curbc = parseInt(f.parents(".scratch").find(".boomcount").html());
