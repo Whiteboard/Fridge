@@ -5,11 +5,11 @@ class User
 
 	property :id,         	Serial    # An auto-increment integer key
 	property :username, 	String, :format => /\S/
-	property :email, 		String, :format => :email
+	property :email, 		String, :format => /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 	property :nickname,		String
 	property :phash,		String, :length => 120 # password hash
 	property :salt,			String, :length => 120 # pass salt
-	property :avatar_url,	String, :length => 120, :format => :url, :required => true
+	property :avatar_url,	String, :length => 120, :format => /(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix, :required => true
 	property :focus,		Text
 	property :location,		Text
 	property :logged_in,	Boolean
