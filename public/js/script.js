@@ -353,6 +353,7 @@ $("#search").on("submit", function(e){
 		$(".exit_search").show().on("click", function(){
 			$("#scratches").empty();
 			$("#scratchboard_h2").html(h2text);
+			latest_scratch = 0;
 			fetch_home();
 			interval = setInterval(fetch_home, 3000);
 			$(".exit_search").off("click");
