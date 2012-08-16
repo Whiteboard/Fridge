@@ -668,6 +668,21 @@ textarea:focus {
   content: "";
   background: url(../images/location-icon.png) center no-repeat;
 }
+.go_to_scratch {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 4px;
+  width: 20px;
+  height: 20px;
+  text-decoration: none;
+  visibility: hidden;
+  color: #444;
+  font-size: 20px;
+}
+.scratch:hover .go_to_scratch {
+  visibility: visible;
+}
 .scratch .posted_by {
   margin-bottom: 32px;
   padding: 4px;

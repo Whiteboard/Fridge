@@ -39,6 +39,7 @@ class Scratch
 	property :boomcount,	Integer, :default => 0
 
 	has n, :thoughts
+	has n, :notifications
 	belongs_to :user
 end
 
@@ -61,6 +62,7 @@ class Notification
 	has n, :notifiers
 	has n, :users, 'User', :through => :notifiers, :via => :user
 	belongs_to :creator, 'User'
+	belongs_to :scratch
 end
 
 class Notifier

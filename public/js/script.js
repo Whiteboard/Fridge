@@ -32,7 +32,7 @@ Handlebars.registerHelper('avatar_url', function(scratch, users) {
 });
 
 
-if ($("body").hasClass("fridge")){
+if ($("body").hasClass("fridge") || $("body").hasClass("single_scratch")){
 
 var latest_scratch = 0, latest_notification = 0,
 	kLINK_DETECTION_REGEX = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
@@ -96,6 +96,7 @@ function fetch_home(){
 				var from = el.creator;
 				nhtml += '<div class="notification clearfix" data-index="'+ el.id +'"><p>From <b>' + from.username + '</b></p>';
 				nhtml += '<p class="notification_message">' + replaceLinks(el.mtext) + '</p>';
+				nhtml += '<a href="/scratch/'+el.scratch.id+'">View</a>';
 				nhtml += '<form action="/notifications/'+el.id+'/read" method="POST"><input type="submit" value="clear"></form>';
 				nhtml += "</div>";
 			}
@@ -113,7 +114,9 @@ function fetch_home(){
 		}
 	});
 }
-fetch_home();
+if ($("body").hasClass("fridge")){
+	fetch_home();
+}
 
 $("#leftbar, #scratchboard").on("submit", "form", function(e){
 	e.preventDefault();
@@ -368,7 +371,26 @@ $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);
 });
 
-var interval = setInterval(fetch_home, 3000);
+if ($("body").hasClass('fridge')){
+	var interval = setInterval(fetch_home, 3000);
+}
+if ($("body").hasClass('single_scratch')){
+	
+	getBooms();
+	getThoughts();
+	twitter();
+	$(".relativeTime").each(function(){
+		$(this).html($.relativeTime($(this).data("date")));
+	});
+	setInterval(function(){
+		getBooms();
+		getThoughts();
+		twitter();
+		$(".relativeTime").each(function(){
+			$(this).html($.relativeTime($(this).data("date")));
+		});
+	}, 3000);
+}
 
 
 

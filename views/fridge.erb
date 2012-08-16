@@ -28,30 +28,32 @@
 
 
 <script id="user_scratches" type="text/x-handlebars-template">
-			{{#each scratches}}
-				<div class='scratch clearfix {{{scratchclass this}}}' data-index="{{{this.id}}}">
-				<div class='clearfix'>
-				<span class="posted_by"><div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b><small><i class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}} </i></small></span>
-				<div class="floatleft scratch_content">
-				<div class="mtext">{{{replacelinks this.mtext }}}</div>
-				{{#if this.clly }}
-					{{{this.clly}}}
-				{{/if}}
-				{{#if this.jsfiddle }}
-					{{{this.jsfiddle}}}
-				{{/if}}
-				</div></div>
-				<div class="thoughts clearfix" id="thoughts-for-{{{this.id}}}">
-				</div>
-				<a href="#" class="thought_link">Reply</a>
-				<form class="boom_form" action="/scratch/{{{this.id}}}/boom" method="post"><input type="submit" value="BOOM!"></form><p class="boomcount" id="boomcount-for-{{{this.id}}}">{{{ this.boomcount }}}</p>
-				<form class="thought_form" action="/scratches/{{{this.id}}}/thoughts" method="POST">
-				<textarea name="mtext">A thought...</textarea>
-				<input type="submit" value="post">
-				</form>
-				</div>
-			{{/each}}
-		</script>
+	{{#each scratches}}
+		<div class='scratch clearfix {{{scratchclass this}}}' data-index="{{{this.id}}}">
+		<a class="go_to_scratch" href="/scratch/{{{this.id}}}">⬈</a>
+		<div class='clearfix'>
+		<span class="posted_by">
+		<div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b><small><i class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}} </i></small></span>
+		<div class="floatleft scratch_content">
+		<div class="mtext">{{{replacelinks this.mtext }}}</div>
+		{{#if this.clly }}
+			{{{this.clly}}}
+		{{/if}}
+		{{#if this.jsfiddle }}
+			{{{this.jsfiddle}}}
+		{{/if}}
+		</div></div>
+		<div class="thoughts clearfix" id="thoughts-for-{{{this.id}}}">
+		</div>
+		<a href="#" class="thought_link">Reply</a>
+		<form class="boom_form" action="/scratch/{{{this.id}}}/boom" method="post"><input type="submit" value="BOOM!"></form><p class="boomcount" id="boomcount-for-{{{this.id}}}">{{{ this.boomcount }}}</p>
+		<form class="thought_form" action="/scratches/{{{this.id}}}/thoughts" method="POST">
+		<textarea name="mtext">A thought...</textarea>
+		<input type="submit" value="post">
+		</form>
+		</div>
+	{{/each}}
+</script>
 <script id="users_template" type="text/x-handlebars-template">
 	{{#with current_user}}
 	<div class="current_user user clearfix" href="#"><a href="/users/edit">Edit your Profile</a>

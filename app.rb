@@ -31,12 +31,22 @@ get "/home.json"  do
 	@scratches = Scratch.all(:limit => 20, :order => [:created_at.desc ], :id.gt => params[:later_than] ) || {}
 	@notifications = current_user.notifieds(:read => false) || {}
 	headers["Content-Type"] = "application/json"
-	"[" + @users.to_json(:exclude => [:phash, :salt], :methods => [:scratches]) + "," + @scratches.to_json(:methods => [:thoughts]) + ","+ @notifications.to_json(:methods => [:creator] ) + "," + current_user.to_json + "]"
+	"[" + @users.to_json(:exclude => [:phash, :salt], :methods => [:scratches]) + "," + @scratches.to_json(:methods => [:thoughts]) + ","+ @notifications.to_json(:methods => [:creator, :scratch] ) + "," + current_user.to_json + "]"
 end
-
+get "/scratch/:id" do
+	@bodyclass = "single_scratch"
+	@scratch = Scratch.get(params[:id])
+	erb :scratch
+end
 post "/scratch" do
 	authenticate!
 	headers["Content-Type"] = "application/json" #return json from this method
+	s = Scratch.new
+	s.user_id = current_user.id
+	if s.save
+		puts "success"
+	end
+	notifications = [] #holding the notifications to attach to the scratch at the end
 	if params[:message].include? "cl.ly"
 		m = params[:message]
 		url = m.match(/https?:\/\/[\S]+\.[a-zA-Z]{2,4}\.?[a-zA-Z]?{2,4}[\/\?#]?([\S]+)?/i)[0]
@@ -57,9 +67,13 @@ post "/scratch" do
 			next if user.nil?
 			n = Notification.new
 			n.creator_id = current_user.id
+			n.scratch_id = s.id
 			n.mtext = params[:message]
 			n.read = false
+			puts n.inspect
 			if n.save
+				puts n.inspect
+				notifications.push(n)
 				nfr = Notifier.new
 				nfr.user_id = user.id
 				nfr.notification_id = n.id
@@ -121,12 +135,11 @@ post "/scratch" do
 			({ :status => "failure", :entry => focus }).to_json
 		end
 	end
-	s = Scratch.new
 	s.jsfiddle = jsfiddle || nil
 	s.clly = clly || nil
+	s.notifications = notifications
 	s.mtext = params[:message]
 	s.created_at = DateTime.now
-	s.user_id = current_user.id
 	if s.save
 		({ :status => "success", :entry => s }).to_json
 	else
