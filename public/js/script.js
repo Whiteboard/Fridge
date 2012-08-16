@@ -337,7 +337,6 @@ function autoComplete(value){
 
 $("#search").on("submit", function(e){
 	e.preventDefault();
-	$(".exit_search").trigger('click');
 	var v = $(this).find("input").val();
 	$.post("/search", { query : v }, function(data){
 		var scontext = {
@@ -351,7 +350,7 @@ $("#search").on("submit", function(e){
 			$("#scratches").html(shtml);
 			clearInterval(interval);
 		}
-		var h2text = $("#scratchboard_h2").text();
+		var h2text = "Scratchboard";
 		$("#scratchboard_h2").html(h2text + " | <small>Search for " + v + " <a class='exit_search'>Cancel</a></small>");
 		$(".more_scratches").hide();
 		$(".exit_search").show().on("click", function(){
