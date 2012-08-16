@@ -96,4 +96,4 @@ end
 
 
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
