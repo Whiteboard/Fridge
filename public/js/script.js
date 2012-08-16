@@ -173,7 +173,7 @@ $("#scratchboard").on("click", ".posted_by", function(e){
 	$('<div class="overlay"></div><div class="overlay_content" style="background-image: url('+$(this).attr("src")+');"><div class="close_overlay">X</div>').appendTo("body");
 });
 $(document).on("click", ".user", function(e){
-	if ($(e.target).html() != "Email"){
+	if ($(e.target).html() != "Email" && $(e.target).html() != "Edit your Profile"){
 		e.preventDefault();
 		$(window).scrollTop(0);
 		var a = $(this).find("a").first();
