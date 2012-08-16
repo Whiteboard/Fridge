@@ -294,7 +294,7 @@ post "/clients/create" do
 	authenticate!
 	c = Client.new
 	c.clientname = params[:clientname]
-	c.clientslug = slugify(c.clientname)
+	c.slug = slugify(c.clientname)
 	c.email = params[:email]
 	c.keywords = params[:keywords]
 	if c.save
@@ -309,7 +309,7 @@ post "/clients/edit" do
 	authenticate!
 	c = Client.first(:id => params[:client_id])
 	c.clientname = params[:clientname]
-	c.clientslug = slugify(c.clientname)
+	c.slug = slugify(c.clientname)
 	c.email = params[:email]
 	c.keywords = params[:keywords]
 	if c.save
