@@ -1,11 +1,22 @@
 <sidebar id="leftbar">
-	<h2 id="twitter_h2">Twitter</h2>
-	<div id="twitter"></div>
-	<h2>Notifications</h2>
-	<div id="notifications"></div>
+	<div class="widget focus">
+		<h2 id="focus_h2">Focus:</h2>
+		<h3 id="focus"></h3>
+	</div>
+	<div class="widget notifications">
+		<h2 id="notifications_h2">Notifications</h2>
+		<div id="notifications"></div>
+	</div>
+	<div class="twitter widget">
+		<h2 id="twitter_h2">Twitter</h2>
+		<div id="twitter"></div>
+	</div>
 </sidebar>
 <div id="scratchboard">
-	<h2 id="scratchboard_h2">Scratchboard</h2>
+	<header class="clearfix"><h2 id="scratchboard_h2" class="floatleft">Scratchboard</h2><form class="floatright" id="search" action="GET">
+		<input name="search" placeholder="search scratches">
+		</form>
+	</header>
 	<form action="/scratch" method="POST" class="clearfix">
 		<h4><span>#focus</span> <span>#location</span></h4>
 		<textarea name="message">Post a scratch.</textarea>
@@ -16,9 +27,6 @@
 	<a class="more_scratches">More Scratches</a>
 </div>
 <sidebar id="rightbar">
-	<form class="clearfix" id="search" action="GET">
-		<input name="search" placeholder="search">
-	</form>
 	<div class="relative clearfix">
 		<a href="#" class="right_drawer_handle"><span></span></a>
 		<div id="users" class="clearfix"></div>

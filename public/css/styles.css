@@ -533,8 +533,10 @@ h1 {
   float: left;
   width: 20%;
   min-width: 200px;
-  padding: 12px;
   background: url(../images/leftbar.png);
+}
+#leftbar .widget {
+  padding: 12px;
 }
 #logout_form {
   position: absolute;
@@ -582,7 +584,7 @@ form.boom_form input {
 
 input {
   display: block;
-  border: 1px solid #777;
+  border: 1px solid #999;
   background: #efefef;
   font-weight: 300;
   font-size: 80%;
@@ -592,7 +594,7 @@ input {
   float: right;
 }
 input:hover{
-  background: #ccc;
+  background: #ddd;
   color: #444;
 }
 input:active {
@@ -726,15 +728,46 @@ textarea:focus {
 #rightbar {
   float: right;
   padding: 12px;
-  width: 108px;
+  width: 0px;
   -webkit-transition: width 0.2s linear;
   /*overflow: hidden;*/
   position: relative;
 }
 #rightbar input {
   width: 100%;
+  display: none;
 }
-  #search {}
+#rightbar.open input {
+  display: block;
+}
+  #search {
+    margin: 12px 0;
+    width: 30%;
+  }
+  
+  #search input {
+    padding: 4px;
+    width: 100%;
+    border: 1px solid transparent;
+    background: #fefefe;
+    box-shadow: 0 1px 6px #dadada;
+    padding-left: 40px;
+    background-image: url(../images/search.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+    -webkit-transition: all 0.1s linear;
+    background-size: 30px;
+  }
+  #search input:focus {
+    background-image: url(../images/search.png);
+    background-size: 20px;
+    background-position: 3px center;
+    padding-left: 30px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    outline: none;
+    -webkit-transition: all 0.1s linear;
+  }
   .exit_search {
     font-weight: lighter;
     background: #dedede;
@@ -753,6 +786,12 @@ textarea:focus {
     top: 0px;
     left: 0px;
     background: #ccc;
+  }
+  #scratchboard header {
+    border-bottom: 1px solid #ccc;
+  }
+  #scratchboard_h2 {
+    margin: 12px 0;
   }
   #scratchboard_h2 small {
     font-weight: lighter;
@@ -836,11 +875,11 @@ textarea:focus {
   top: 8px;
   position: relative;
 }*/
+.user:nth-child(odd) {
+  background:#44474a;
+}
 .user:nth-child(even) {
   background:#363a3d;
-}
-.user:nth-child(odd) {
-  background:#1d1f21;
 }
 .user a {
   color: #dedede;
@@ -896,10 +935,34 @@ textarea:focus {
   
 }
 #focus {
-  color: #ffb58d;
+  color: #444;
+  font-weight: lighter;
+  font-family: "Merriweather";
+}
+.twitter.widget {
+  background: #f3fcff;
+  border-left: 8px solid #3bd2fd;
+}
+.notifications.widget {
+  background: #fef2f6;
+  border-left: 8px solid #f34e7d;
+}
+.focus.widget {
+  background: #fcf4f0;
+  border-left: 8px solid #f2844e;
+}
+#notifications_h2 {
+  color: #f34e7d;
 }
 #twitter_h2 {
   color: #3cc1ec;
+}
+#focus_h2 {
+  color: #f2844e;
+}
+#notifications_h2, #twitter_h2, #focus_h2 {
+  font-weight: lighter;
+  margin: 0;
 }
 .tweet {
   /*border-bottom: 1px solid #c2e3ec;*/
@@ -918,11 +981,13 @@ textarea:focus {
   margin: 0;
   padding: 0;
 }
-#notifications {}
+#notifications {
+  
+}
 .notification {
   padding: 12px;
-  background: #efefef;
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 2px #ec9eb4;
+  background: #fcf5f7;
 }
 .notification p {
   margin: 0;
@@ -930,13 +995,13 @@ textarea:focus {
 }
 .notification input {
   float: right;
-  border: 1px solid #b6380c;
+  border: 1px solid #ec9eb4;
   font-weight: 300;
   font-size: 80%;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: #ed6535;
-  color: #fff;
+  background: #f6e3e8;
+  color: #f34e7d;
 }
 form.submitting textarea {
   color: #777;
@@ -977,7 +1042,10 @@ form.submitting textarea {
   margin-right: 12px;
   font-size: 90%;
   padding: 2px 4px;
-  color: #bababa;
+  color: #ababab;
+}
+.thought_link:hover {
+  color: #777;
 }
 .thought_form {
   display: none;
