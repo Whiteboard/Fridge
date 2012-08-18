@@ -1,26 +1,32 @@
-<sidebar id="leftbar">
-	<h2 id="twitter_h2">Twitter</h2>
-	<div id="twitter"></div>
-	<h2 id="notifications_h2">Notifications</h2>
-	<div id="notifications"></div>
-</sidebar>
-<div id="scratchboard">
-	<h2>Scratch by <%= @scratch.user.username %></h2>
-	<div class='scratch clearfix' data-index="<%= @scratch.id %>">
-		<div class='clearfix'>
-		<span class="posted_by"><div style="background-image:url(<%= @scratch.user.avatar_url %>);" class="scratch_avatar"></div><b><%= @scratch.user.username %></b><small><i class="relativeTime" data-date="<%= @scratch.created_at %>"></i></small></span>
-		<div class="floatleft scratch_content">
-		<div class="mtext"><%= @scratch.mtext %></div>
-		<%= @scratch.clly unless @scratch.clly.nil? %>
-		<%= @scratch.jsfiddle unless @scratch.jsfiddle.nil? %>
-		</div></div>
-		<div class="thoughts clearfix" id="thoughts-for-<%= @scratch.id %>">
+<div id="content">
+	<sidebar id="leftbar">
+		<div class="widget notifications">
+			<h2 id="notifications_h2">Notifications</h2>
+			<div id="notifications"></div>
 		</div>
-		<a href="#" class="thought_link">Reply</a>
-		<form class="boom_form" action="/scratch/<%= @scratch.id %>/boom" method="post"><input type="submit" value="BOOM!"></form><p class="boomcount" id="boomcount-for-<%= @scratch.id %>"><%= @scratch.boomcount %></p>
-		<form class="thought_form" action="/scratches/<%= @scratch.id %>/thoughts" method="POST">
-		<textarea name="mtext">A thought...</textarea>
-		<input type="submit" value="post">
-		</form>
+		<div class="twitter widget">
+			<h2 id="twitter_h2">Twitter</h2>
+			<div id="twitter"></div>
 		</div>
+	</sidebar>
+	<div id="scratchboard">
+		<h2>Scratch by <%= @scratch.user.username %></h2>
+		<div class='scratch clearfix' data-index="<%= @scratch.id %>">
+			<div class='clearfix'>
+			<span class="posted_by"><div style="background-image:url(<%= @scratch.user.avatar_url %>);" class="scratch_avatar"></div><b><%= @scratch.user.username %></b><small><i class="relativeTime" data-date="<%= @scratch.created_at %>"></i></small></span>
+			<div class="floatleft scratch_content">
+			<div class="mtext"><%= @scratch.mtext %></div>
+			<%= @scratch.clly unless @scratch.clly.nil? %>
+			<%= @scratch.jsfiddle unless @scratch.jsfiddle.nil? %>
+			</div></div>
+			<div class="thoughts clearfix" id="thoughts-for-<%= @scratch.id %>">
+			</div>
+			<a href="#" class="thought_link">Reply</a>
+			<form class="boom_form" action="/scratch/<%= @scratch.id %>/boom" method="post"><input type="submit" value="BOOM!"></form><p class="boomcount" id="boomcount-for-<%= @scratch.id %>"><%= @scratch.boomcount %></p>
+			<form class="thought_form" action="/scratches/<%= @scratch.id %>/thoughts" method="POST">
+			<textarea name="mtext">A thought...</textarea>
+			<input type="submit" value="post">
+			</form>
+			</div>
+	</div>
 </div>
