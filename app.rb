@@ -372,6 +372,7 @@ get "/users/:username/resetpassword" do
 			flash[:warning] = "The user \"#{params[:username]}\" doesn't exist."
 			redirect "/"
 		else
+			@bodyclass = "external"
 			erb :resetpassword
 		end
 	else
