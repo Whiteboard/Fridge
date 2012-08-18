@@ -363,3 +363,30 @@ get "/clients" do
 	@clients = Client.all
 	erb :clients
 end
+
+get "/users/:username/resetpassword" do
+	authenticate!
+	if current_user.email.include? "whiteboard"
+		@user = User.first(:username => params[:username])
+		if @user.nil?
+			flash[:warning] = "The user \"#{params[:username]}\" doesn't exist."
+			redirect "/"
+		else
+			erb :resetpassword
+		end
+	else
+		redirect "/"
+	end
+end
+post "/users/:id/resetpassword" do
+	user = User.get(params[:id])
+	user.salt = BCrypt::Engine.generate_salt
+	user.phash = BCrypt::Engine.hash_secret(params[:password], user.salt)
+	if user.save
+		flash[:notification] = "User's password successfully reset"
+		redirect "/"
+	else
+		flash[:warning] = "Failed to reset the password. Try again?"
+		redirect "/"
+	end
+end
