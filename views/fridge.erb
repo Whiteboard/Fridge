@@ -1,30 +1,36 @@
-<sidebar id="leftbar">
-	<div class="widget focus">
-		<h2 id="focus_h2">Focus:</h2>
-		<h3 id="focus"></h3>
-	</div>
-	<div class="widget notifications">
-		<h2 id="notifications_h2">Notifications</h2>
-		<div id="notifications"></div>
-	</div>
-	<div class="twitter widget">
-		<h2 id="twitter_h2">Twitter</h2>
-		<div id="twitter"></div>
-	</div>
-</sidebar>
-<div id="scratchboard">
-	<header class="clearfix"><h2 id="scratchboard_h2" class="floatleft">Scratchboard</h2><form class="floatright" id="search" action="GET">
-		<input name="search" placeholder="search scratches">
+<div id="content">
+	<div class="focus widget clearfix">
+			<h2 id="focus_h2" class="floatleft">
+				<div class="avatar_img floatleft" style="background-image:url(<%= current_user.avatar_url %>);"></div>
+				Welcome Back, <%= current_user.username %>. You're currently focusing on
+				<span id="focus"><%= current_user.focus %></span>
+			from <span id="location"><%= current_user.location %></span>
+			</h2>
+		</div>
+	<sidebar id="leftbar">
+		<div class="widget notifications">
+			<h2 id="notifications_h2">Notifications</h2>
+			<div id="notifications"></div>
+		</div>
+		<div class="twitter widget">
+			<h2 id="twitter_h2">Twitter</h2>
+			<div id="twitter"></div>
+		</div>
+	</sidebar>
+	<div id="scratchboard">
+		<header class="clearfix"><h2 id="scratchboard_h2" class="floatleft">Scratchboard</h2><form class="floatright" id="search" action="GET">
+			<input name="search" placeholder="search scratches">
+			</form>
+		</header>
+		<form action="/scratch" method="POST" class="clearfix">
+			<h4><span>#focus</span> <span>#location</span></h4>
+			<textarea name="message">Post a scratch.</textarea>
+			<div class="clearfix"></div>
+			<input type="submit" value="Post" class="submit button">
 		</form>
-	</header>
-	<form action="/scratch" method="POST" class="clearfix">
-		<h4><span>#focus</span> <span>#location</span></h4>
-		<textarea name="message">Post a scratch.</textarea>
-		<div class="clearfix"></div>
-		<input type="submit" value="Post">
-	</form>
-	<div id="scratches"></div>
-	<a class="more_scratches">More Scratches</a>
+		<div id="scratches"></div>
+		<a class="more_scratches">More Scratches</a>
+	</div>
 </div>
 <sidebar id="rightbar" class="open">
 	<div class="relative clearfix">
@@ -41,7 +47,8 @@
 		<a class="go_to_scratch" href="/scratch/{{{this.id}}}">⬈</a>
 		<div class='clearfix'>
 		<span class="posted_by">
-		<div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b><small><i class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}} </i></small></span>
+		<small class="relativeTime" data-date="{{{this.created_at}}}">{{{ relativeTime this.created_at }}}</small>
+		<div style="background-image:url({{{ avatar_url this ../users }}});" class="scratch_avatar"></div><b>{{{ username this ../users }}}</b></span>
 		<div class="floatleft scratch_content">
 		<div class="mtext">{{{replacelinks this.mtext }}}</div>
 		{{#if this.clly }}
@@ -53,11 +60,11 @@
 		</div></div>
 		<div class="thoughts clearfix" id="thoughts-for-{{{this.id}}}">
 		</div>
-		<a href="#" class="thought_link">Reply</a>
+		<a href="#" class="thought_link submit button">Reply</a>
 		<form class="boom_form" action="/scratch/{{{this.id}}}/boom" method="post"><input type="submit" value="BOOM!"></form><p class="boomcount" id="boomcount-for-{{{this.id}}}">{{{ this.boomcount }}}</p>
 		<form class="thought_form" action="/scratches/{{{this.id}}}/thoughts" method="POST">
 		<textarea name="mtext">A thought...</textarea>
-		<input type="submit" value="post">
+		<input type="submit" value="post" class="submit button">
 		</form>
 		</div>
 	{{/each}}
@@ -68,8 +75,8 @@
 		<div class="avatar" style="background:url({{{this.avatar_url}}}) center; background-size:cover;"></div>
 		<div class="meta">
 				<p class="username"><a>{{{ this.username }}}</a></p>
-				<p class="focus"><span>Focus</span> {{{ replacelinks focus }}}</p>
 				<p class="location"><span>Location</span> {{{ replacelinks location }}}</p>
+				<p class="focus"><span>Focus</span> {{{ replacelinks focus }}}</p>
 				<p class="email"><a target="_blank" href="mailto:{{{email}}}">Email</a></p>
 		</div>
 	</div>
@@ -78,8 +85,8 @@
 	<div class="user clearfix">
 		<div class="meta">
 				<p class="username"><a>{{{ this.username }}}</a></p>
-				<p class="focus"><span>Focus</span> {{{ replacelinks focus }}}</p>
 				<p class="location"><span>Location</span> {{{ replacelinks el.location }}}</p>
+				<p class="focus"><span>Focus</span> {{{ replacelinks focus }}}</p>
 				<p class="email"><a target="_blank" href="mailto:{{{email}}}">Email</a></p>
 		</div>
 	</div>

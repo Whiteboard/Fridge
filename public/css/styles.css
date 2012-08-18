@@ -483,17 +483,13 @@ block {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-h1,h2,h3,h4,h5,h6 {
-  font-family: 'Source Sans Pro', sans-serif;
-}
 form input {
-  font-family: 'Source Sans Pro', sans-serif;
   font-weight: normal;
 }
 body {
-   font-family: "Merriweather", serif;
    font-size: 14px;
    color: #444;
+   font-family: 'Source Sans Pro', sans-serif;
    background-color: #fff;
    font-weight: 400;
 }
@@ -505,7 +501,7 @@ body {
 iframe, object {
   max-width: 100%;
 }
-h1 {
+header#main-head {
   background: #111;
   padding: 10px;
   text-indent: 12px;
@@ -513,34 +509,48 @@ h1 {
   font-weight: 300;
   margin-top: 0;
 }
+header#main-head #logo {
+  width: 151px;
+  height: 25px;
+  background-image: url(../images/logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  text-indent: -9999em;
+}
 #session_info {
   line-height: 30px;
   height: 30px;
   background-color: #666;
   color: #fff;
 }
-#session_info nav {
-  margin-left: 12px;
-  font-family: "Source Sans Pro", sans-serif;
+header nav {
+  line-height: 25px;
 }
-#session_info nav a {
-  margin-left: 12px;
-  font-family: "Source Sans Pro", sans-serif;
+header nav a {
+  color: #aaa;
+  font-weight: normal;
   text-decoration: none;
+  margin-right: 20px;
 }
-#session_info p {
-  padding: 0;
-  margin: 0;
+header nav a:hover {
+  color: #dedede;
+  -webkit-transition: all 0.2s linear;
 }
-#session_info a {
-  margin-right: 12px;
-  color: #ededed;
+#content {
+  width: 70%;
+  float: left;
+  -webkit-transition: width 0.2s linear;
+}
+#content.full {
+  width: 100%;
+  float: left;
+  -webkit-transition: width 0.2s linear;
 }
 #leftbar {
   float: left;
-  width: 20%;
+  width: 28%;
   min-width: 200px;
-  background: url(../images/leftbar.png);
 }
 #leftbar .widget {
   padding: 12px;
@@ -561,38 +571,41 @@ form {
 .boomcount {
   text-transform: uppercase;
   margin: 0;
-  background: #ffe5cf;
+  background: #ffe1d4;
   text-decoration: none;
   border: 1px solid #ef6f27;
   border-left: 0;
   color: #ef6f27;
-  font-family: 'Source Sans Pro', sans-serif;
   box-shadow: none;
   text-transform: uppercase;
   float: left;
-  font-size: 90%;
-  padding: 2px 6px;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  padding: 5px 4px;
 }
 form.boom_form {
   float: left;
 }
 form.boom_form input {
-  background: #ffe5cf;
+  background: #ffe1d4;
   text-decoration: none;
   border: 1px solid #ef6f27;
   color: #ef6f27;
-  font-family: 'Source Sans Pro', sans-serif;
   box-shadow: none;
   text-transform: uppercase;
   float: left;
-  font-size: 90%;
-  padding: 2px 4px;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  padding: 5px 4px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  font-weight: bold;
 }
 
 input {
   display: block;
   border: 1px solid #999;
-  background: #efefef;
+  background: #494949;
   font-weight: 300;
   font-size: 80%;
   letter-spacing: 0.05em;
@@ -620,6 +633,19 @@ textarea:focus {
   outline: none;
   border: 1px solid #ccc;
 }
+.button.submit {
+  background: #ebebeb;
+  border: 1px solid #c2c2c2;
+  padding: 5px 4px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 2px;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  text-transform: uppercase;
+}
 #forms h4, #scratchboard h4 {
   padding: 0;
   padding-top: 12px;
@@ -632,13 +658,13 @@ textarea:focus {
 }
 #scratchboard {
   float: left;
-  width: 50%;
+  width: 72%;
   min-width: 500px;
-  max-width: 900px;
-  padding: 12px;
+  padding: 20px;
 }
 .scratch {
   padding: 20px;
+  padding-left: 40px;
   box-sizing: border-box;
   /*box-shadow: 1px 1px 3px -1px #aaa, 0 0 8px -2px #ccc, inset 0 0 10px #eee;*/
   /*border-radius: 4px;*/
@@ -651,30 +677,21 @@ textarea:focus {
   padding: 6px 12px;
   background: ;
 }
-.scratch.focus {
-  background-color: #eaf5fb;
+.scratch.focus .mtext, .scratch.location .mtext {
+  position: relative;
+  padding-left: 30px;
 }
-.scratch.focus:before {
+.scratch.focus .mtext:before, .scratch.location .mtext:before {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  left: 0;
   width: 16px;
-  padding: 4px;
   height: 16px;
   content: "";
-  background: url(../images/focus-icon.png) center no-repeat;
 }
-.scratch.location {
-  background-color: #fcf4f0;
+.scratch.focus .mtext:before {
+  background: url(../images/focus-icon.png) center no-repeat; 
 }
-.scratch.location:before {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 16px;
-  padding: 4px;
-  height: 16px;
-  content: "";
+.scratch.location .mtext:before {
   background: url(../images/location-icon.png) center no-repeat;
 }
 .go_to_scratch {
@@ -698,9 +715,13 @@ textarea:focus {
   display: block;
   text-align: left;
   line-height: 40px;
+  position: relative;
 }
-.scratch .posted_by .relativeTime {
-  margin-left: 20px;
+.scratch .posted_by small {
+  left: -40px;
+  font-weight: bold;
+  color: #cecece;
+  position: absolute;
 }
 .scratch .scratch_content {
   min-width: 364px;
@@ -734,7 +755,6 @@ textarea:focus {
 }
 #rightbar {
   float: right;
-  padding: 12px;
   width: 0px;
   -webkit-transition: width 0.2s linear;
   /*overflow: hidden;*/
@@ -795,7 +815,7 @@ textarea:focus {
     background: #ccc;
   }
   #scratchboard header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #d7d7d7;
   }
   #scratchboard_h2 {
     margin: 12px 0;
@@ -833,14 +853,13 @@ textarea:focus {
     background-color: rgba(40,40,40,1);
   }
 #rightbar.open {
-  width: 308px;
+  width: 30%;
   -webkit-transition: width 0.2s linear;
 }
   #rightbar.open .right_drawer_handle span {
     background-position: right center;
   }
 #users .user {
-  font-family: "Source Sans Pro", sans-serif;
   padding: 12px;
   float: left;
   width: 100%;
@@ -882,6 +901,7 @@ textarea:focus {
   top: 8px;
   position: relative;
 }*/
+
 .user:nth-child(odd) {
   background:#44474a;
 }
@@ -942,30 +962,57 @@ textarea:focus {
   
 }
 #focus {
-  color: #444;
-  font-weight: lighter;
-  font-family: "Merriweather";
+}
+.avatar_img {
+  background-size: cover;
+  background-position: center;
+  width: 30px;
+  height: 30px;
 }
 .twitter.widget {
   background: #f3fcff;
+  border-bottom: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
   border-left: 8px solid #3bd2fd;
 }
 .notifications.widget {
+  border-bottom: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
   background: #fef2f6;
   border-left: 8px solid #f34e7d;
 }
 .focus.widget {
-  background: #fcf4f0;
-  border-left: 8px solid #f2844e;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffcf33;
+  color: #fff;
 }
 #notifications_h2 {
   color: #f34e7d;
+  padding-left: 30px;
+  font-size: 2em;
+  font-weight: lighter;
+  background-image: url(../images/notifications-icon.png);
+  background-position: center left;
+  background-repeat: no-repeat;
 }
 #twitter_h2 {
   color: #3cc1ec;
+  padding-left: 30px;
+  font-size: 2em;
+  font-weight: lighter;
+  background-image: url(../images/twitter-icon.png);
+  background-position: center left;
+  background-repeat: no-repeat;
 }
 #focus_h2 {
-  color: #f2844e;
+  text-indent: 0.4em;
+  color: #fff;
+  line-height: 30px;
+}
+#focus_h2 span {
+  padding: 4px 0;
+  border-bottom: 1px solid #fff;
 }
 #notifications_h2, #twitter_h2, #focus_h2 {
   font-weight: lighter;
@@ -974,19 +1021,28 @@ textarea:focus {
 .tweet {
   /*border-bottom: 1px solid #c2e3ec;*/
   padding: 6px;
-  margin-bottom: 12px;
+  margin: 4px 0 8px;
   /*background-color: #e2f9ff;*/
+  position: relative;
+  padding-left: 34px;
 }
 .tweet>a:first-child {
   text-decoration: none;
   font-weight: bold;
-  font-family: "Source Sans Pro", sans-serif;
 }
 .tweet p {
   color: #6b6b6b;
   font-size: 90%;
   margin: 0;
   padding: 0;
+}
+.tweet small {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  color: #909799;
+  font-weight: bold;
+  position: absolute;
 }
 #notifications {
   
@@ -1015,7 +1071,6 @@ form.submitting textarea {
 }
 .thoughts {
   border-left: 3px solid #aaa;
-  font-family: 'Source Sans Pro', sans-serif;
   margin: 20px 0 20px;
   box-sizing: border-box;
 }
@@ -1039,17 +1094,9 @@ form.submitting textarea {
   font-style: italic;
 }
 .thought_link {
-  background: #ddd;
-  text-decoration: none;
-  border: 1px solid #bababa;
-  font-family: 'Source Sans Pro', sans-serif;
-  border-radius: 3px;
-  text-transform: uppercase;
   float: left;
   margin-right: 12px;
   font-size: 90%;
-  padding: 2px 4px;
-  color: #ababab;
 }
 .thought_link:hover {
   color: #777;

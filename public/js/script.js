@@ -72,6 +72,9 @@ function fetch_home(){
 		if ($("#focus").html() != current_user.focus){
 			$("#focus").html(current_user.focus);
 		}
+		if ($("#location").html() != current_user.location){
+			$("#location").html(current_user.location);
+		}
 		var scontext = {
 				scratches : [],
 				users : users
@@ -369,6 +372,7 @@ $("#search").on("submit", function(e){
 
 $(".right_drawer_handle").on("click", function(e){
 	$("#rightbar").toggleClass("open");
+	$("#content").toggleClass("full");
 });
 $("body").on("click", "a.tldr", function(){
 	$(this).siblings(".tldr").toggle(200);

@@ -22,39 +22,39 @@ $.relativeTime = function(dateString) {
  
         if (diff < second * 2) {
             // within 2 seconds
-            return "right now";
+            return "NOW";
         }
  
         if (diff < minute) {
-            return Math.floor(diff / second) + " seconds ago";
+            return Math.floor(diff / second) + " S";
         }
  
         if (diff < minute * 2) {
-            return "about 1 minute ago";
+            return "1M";
         }
  
         if (diff < hour) {
-            return Math.floor(diff / minute) + " minutes ago";
+            return Math.floor(diff / minute) + " M";
         }
  
         if (diff < hour * 2) {
-            return "about 1 hour ago";
+            return "1H";
         }
  
         if (diff < day) {
-            return  Math.floor(diff / hour) + " hours ago";
+            return  Math.floor(diff / hour) + " H";
         }
  
         if (diff > day && diff < day * 2) {
-            return "yesterday";
+            return "YD";
         }
  
         if (diff < day * 365) {
-            return Math.floor(diff / day) + " days ago";
+            return Math.floor(diff / day) + " D";
         }
  
         else {
-            return "over a year ago";
+            return ">1Y";
         }
     }
 
