@@ -22,9 +22,17 @@
 			<input name="search" placeholder="search scratches">
 			</form>
 		</header>
-		<form action="/scratch" method="POST" class="clearfix">
+		<form action="/scratch" method="POST" class="clearfix" id="newscratch">
 			<h4><span>#focus</span> <span>#location</span></h4>
 			<textarea name="message">Post a scratch.</textarea>
+			<section id="client_name">
+			<label>For:</label> <select name="client_id">
+				<option selected>(Choose Client)</option>
+				<% @clients.each do |c| %>
+				<option value="<%= c.id %>"><%= c.clientname %></option>
+				<% end %>
+			</select>
+			</section>
 			<div class="clearfix"></div>
 			<input type="submit" value="Post" class="submit button">
 		</form>

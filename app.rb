@@ -19,6 +19,7 @@ get "/" do
 	if logged_in?
 		authenticate!
 		@bodyclass = "fridge"
+		@clients = Client.all
 		erb :fridge, :layout => :layout
 	else
 		@bodyclass = "external"
@@ -110,7 +111,7 @@ post "/scratch" do
 		clients.each do |c|
 			keywords.push [c.id, c.keywords]
 		end
-		if params[:client_name].nil?
+		if params[:client_id].nil? || params[:client_id].empty?
 			keywords.each do |keys|
 				keya = keys[1].split ","
 				keya.collect! { |k| k.strip.downcase }
@@ -119,7 +120,7 @@ post "/scratch" do
 				end
 			end
 		else
-			selectedclient = Client.first(:clientname => params[:client_name])
+			selectedclient = Client.first(:id => params[:client_id])
 		end
 		if !selectedclient.nil?
 			tc = Timecard.new

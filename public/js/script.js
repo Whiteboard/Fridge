@@ -294,7 +294,18 @@ setTimeout(function(){
 
 $(document).on("keydown", function(e){
 	if ($(e.target).parents("form").length){
-		return;
+		if ($(e.target).parents("form#newscratch").length){
+			var f = $(e.target).parents("form#newscratch"),
+				v = f.find("textarea").val();
+				if (v.toLowerCase().indexOf("#focus")>=0){
+					$("section#client_name:not(:visible)").stop().fadeIn();
+				} else {
+					$("section#client_name:visible").stop().fadeOut();
+				}
+			return;
+		} else {
+			return;
+		}
 	}
 	if (e.keyCode == 83 ){
 		e.preventDefault();

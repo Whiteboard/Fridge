@@ -7,7 +7,7 @@
 	</tr>
 <% @clients.each do |c| %>
 	<tr>
-		<td><%= c.clientname %></td>
+		<td><a href="/clients/<%= c.id %>"><%= c.clientname %></a></td>
 		<td><%= c.email %></td>
 		<td><%= c.keywords %></td>
 	</tr>

@@ -663,6 +663,9 @@ textarea:focus {
   min-width: 500px;
   padding: 20px;
 }
+#client_name {
+  display: none;
+}
 .scratch {
   padding: 20px;
   padding-left: 40px;
