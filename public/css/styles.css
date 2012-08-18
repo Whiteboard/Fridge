@@ -510,6 +510,7 @@ header#main-head {
   margin-top: 0;
 }
 header#main-head #logo {
+  display: block;
   width: 151px;
   height: 25px;
   background-image: url(../images/logo.png);
