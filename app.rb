@@ -217,6 +217,7 @@ post "/scratches/:id/thoughts" do
 			n.mtext = params[:mtext]
 			n.read = false
 			notifications.push(n)
+			puts n.inspect
 			if n.save
 				nfr = Notifier.new
 				nfr.user_id = user.id
