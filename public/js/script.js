@@ -211,9 +211,9 @@ function buildtweets(data){
 	}
 }
 $("#scratchboard h4 span").on("click", function(){
-	$("#scratchboard textarea").first().blur().focus();
-	var curval = $("#scratchboard textarea").val()
-	$("#scratchboard textarea").val($(this).text() + " " + curval);
+	var t = $("#scratchboard textarea").first();
+	var curval = t.val();
+	$("#scratchboard textarea").blur().focus().val($(this).text() + " " + curval);
 });
 
 function getusername(users,id){
@@ -313,10 +313,12 @@ $(document).on("keydown", function(e){
 		$("#scratchboard form").eq(1).find("textarea").blur().focus();
 	} else if (e.keyCode == 70){
 		e.preventDefault();
-		$("#scratchboard form").eq(1).find("textarea").blur().focus().val("#focus: ");
+		var t = $("#scratchboard form").eq(1).find("textarea");
+		t.blur().focus().val(t.val() + "#focus: ");
 	} else if (e.keyCode == 76){
 		e.preventDefault();
-		$("#scratchboard form").eq(1).find("textarea").blur().focus().val("#location: ");
+		var t = $("#scratchboard form").eq(1).find("textarea");
+		t.blur().focus().val(t.val() + "#location: ");
 	}
 }).on("keyup", function(e){
 	if ($(e.target).val().indexOf("@") >= 0){
