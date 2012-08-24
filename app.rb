@@ -206,7 +206,7 @@ post "/scratches/:id/thoughts" do
 	s = Scratch.first(params[:id])
 	notifications = s.notifications
 	if t.mtext.match(/@[a-zA-Z1-9]+/i)
-		users = params[:message].scan(/@[a-zA-Z1-9]+/i)
+		users = t.mtext.scan(/@[a-zA-Z1-9]+/i)
 		users.each do |u|
 			u.slice! "@"
 			user = User.first(:username => u)
