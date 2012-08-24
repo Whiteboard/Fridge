@@ -192,6 +192,7 @@ $(document).on("click", ".user", function(e){
 function twitter(){
 	var t = ["taylorleejones", "jcutrell", "whiteboardis", "ericbrwn", "taylordolan", "department85", "benjaminfleet"],
 		twittersearchurl = t.join("+OR+from:");
+		twittersearchurl += "&@whiteboardis";
 
 	$.getJSON("http://search.twitter.com/search.json?q=from:"+twittersearchurl+"&rpp=10&callback=?", buildtweets);
 }
