@@ -205,18 +205,20 @@ post "/scratches/:id/thoughts" do
 	t.mtext = params[:mtext]
 	s = Scratch.first(:id => params[:id])
 	notifications = s.notifications
-	n = Notification.new(:mtext => "<strong>Comment from: #{current_user.username} </strong>- " + params[:mtext],
+	if (s.user_id != current_user.id){
+		n = Notification.new(:mtext => "<strong>Comment from: #{current_user.username} </strong>- " + params[:mtext],
 						:creator_id => current_user.id,
 						:scratch_id => s.id,
 						:read => false,
 						)
-	notifications.push(n)
-	if n.save
-		nfr = Notifier.new(:user_id => s.user.id, :notification_id => n.id)
-		if !nfr.save
-			({ :status => "failure", :entry => n }).to_json
+		notifications.push(n)
+		if n.save
+			nfr = Notifier.new(:user_id => s.user.id, :notification_id => n.id)
+			if !nfr.save
+				({ :status => "failure", :entry => n }).to_json
+			end
 		end
-	end
+	}
 	if t.mtext.match(/@[a-zA-Z1-9]+/i)
 		users = t.mtext.scan(/@[a-zA-Z1-9]+/i)
 		users.each do |u|
@@ -304,6 +306,7 @@ post "/git/deploy" do
 	s = Scratch.new(:user_id => u.id)
 	s.mtext = "New commit, comrades. From: <a href='mailto:#{params[:user]}'>" + params[:user] + "</a> - <a class=\"tldr\">Details</a><p class=\"tldr\">#{params[:git_log]}</p>"
 	s.created_at = DateTime.now
+	s.notifications = []
 	s.save
 end
 
