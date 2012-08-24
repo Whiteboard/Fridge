@@ -251,7 +251,7 @@ function getThoughts(){
 function getBooms(){
 	var ids = [];
 	$(".scratch").each(function(){
-		ids.push($(this).data("index"))
+		ids.push($(this).data("index"));
 	});
 	$.getJSON("/booms/" + ids.join(","), function(data){
 		$(data).each(function(i,el){
