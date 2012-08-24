@@ -10,7 +10,7 @@ require 'sinatra/flash'
 enable :sessions
 set :protection, :except => :frame_options
 require './helpers.rb'
-# DataMapper::Logger.new(STDOUT, :debug)
+DataMapper::Logger.new(STDOUT, :debug)
 require './models.rb'
 require './users_controller.rb'
 
