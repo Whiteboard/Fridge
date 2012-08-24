@@ -286,6 +286,11 @@ post "/scratch/:id/boom" do
 	headers["Content-Type"] = "application/json"
 	s = Scratch.get(params[:id])
 	s.boomcount = s.boomcount + 1
+	if s.boomlist.empty?
+		s.boomlist = "#{current_user.username}"
+	else
+		s.boomlist = s.boomlist+ ", #{current_user.username}"
+	end
 	if s.save
 		{:status => "success", :entry => s}.to_json
 	else

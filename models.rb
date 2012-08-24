@@ -37,6 +37,7 @@ class Scratch
 	property :clly,			String, :length => 350
 	property :jsfiddle,		String, :length => 350
 	property :boomcount,	Integer, :default => 0
+	property :boomlist,		String, :length => 10000
 
 	has n, :thoughts
 	has n, :notifications
