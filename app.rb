@@ -210,6 +210,7 @@ post "/scratches/:id/thoughts" do
 						:scratch_id => s.id,
 						:read => false,
 						)
+	notifications.push(n)
 	if n.save
 		nfr = Notifier.new(:user_id => s.user.id, :notification_id => n.id)
 		if !nfr.save
