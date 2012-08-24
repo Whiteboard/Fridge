@@ -303,11 +303,16 @@ post "/scratch/:id/boom" do
 end
 post "/git/deploy" do
 	u = User.first(:username => "picard")
-	s = Scratch.new(:user_id => u.id)
+	s = Scratch.new
+	s.user_id = u.id
 	s.mtext = "New commit, comrades. From: <a href='mailto:#{params[:user]}'>" + params[:user] + "</a> - <a class=\"tldr\">Details</a><p class=\"tldr\">#{params[:git_log]}</p>"
 	s.created_at = DateTime.now
-	s.notifications = []
-	s.save
+	if s.save
+		return true
+	else
+		status 500
+		return false
+	end
 end
 
 get "/users/edit" do
