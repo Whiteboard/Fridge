@@ -203,6 +203,34 @@ post "/scratches/:id/thoughts" do
 	headers["Content-Type"] = "application/json"
 	t = Thought.new
 	t.mtext = params[:mtext]
+	s = Scratch.first(params[:id])
+	notifications = s.notifications
+	if t.mtext.match(/@[a-zA-Z1-9]+/i)
+		users = params[:message].scan(/@[a-zA-Z1-9]+/i)
+		users.each do |u|
+			u.slice! "@"
+			user = User.first(:username => u)
+			next if user.nil?
+			n = Notification.new
+			n.creator_id = current_user.id
+			n.scratch_id = s.id
+			n.mtext = params[:mtext]
+			n.read = false
+			notifications.push(n)
+			if n.save
+				nfr = Notifier.new
+				nfr.user_id = user.id
+				nfr.notification_id = n.id
+				if !nfr.save
+					({ :status => "failure", :entry => n }).to_json
+				end
+			else
+				({ :status => "failure", :entry => n }).to_json
+			end
+		end
+	end
+	s.notifications = notifications
+	s.save
 	t.scratch_id = params[:id]
 	t.user_id = current_user.id
 	t.created_at = DateTime.now
