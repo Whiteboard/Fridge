@@ -207,7 +207,7 @@ post "/scratches/:id/thoughts" do
 	notifications = s.notifications
 	n = Notification.new(:mtext => "Comment from: #{current_user.username}" + params[:mtext],
 						:creator_id => current_user.id,
-						:scratch_id = s.id,
+						:scratch_id => s.id,
 						:read => false,
 						)
 	if n.save
