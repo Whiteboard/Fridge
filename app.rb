@@ -205,7 +205,7 @@ post "/scratches/:id/thoughts" do
 	t.mtext = params[:mtext]
 	s = Scratch.first(:id => params[:id])
 	notifications = s.notifications
-	n = Notification.new(:mtext => "Comment from: #{current_user.username}" + params[:mtext],
+	n = Notification.new(:mtext => "<strong>Comment from: #{current_user.username} </strong>- " + params[:mtext],
 						:creator_id => current_user.id,
 						:scratch_id => s.id,
 						:read => false,
