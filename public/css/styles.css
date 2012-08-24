@@ -585,10 +585,11 @@ form {
   padding: 5px 4px;
 }
 .boomlist {
-  margin: 0 4px;
+  margin: 0 0 0 8px;
   font-style: italic;
   font-size: 0.8em;
-  color: #ffe1d4;
+  color: #EF6F27;
+  line-height: 20px;
 }
 form.boom_form {
   float: left;
