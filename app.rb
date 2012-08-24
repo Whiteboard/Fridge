@@ -203,7 +203,7 @@ post "/scratches/:id/thoughts" do
 	headers["Content-Type"] = "application/json"
 	t = Thought.new
 	t.mtext = params[:mtext]
-	s = Scratch.first(params[:id])
+	s = Scratch.first(:id => params[:id])
 	notifications = s.notifications
 	if t.mtext.match(/@[a-zA-Z1-9]+/i)
 		users = t.mtext.scan(/@[a-zA-Z1-9]+/i)
