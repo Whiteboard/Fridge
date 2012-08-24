@@ -258,6 +258,9 @@ function getBooms(){
 			if ($("#boomcount-for-" + el.id).html() != el.boomcount){
 				$("#boomcount-for-" + el.id).html(el.boomcount);
 			}
+			if ($("#boomlist-for-" + el.id).html() != el.boomlist){
+				$("#boomlist-for-" + el.id).html(el.boomlist);
+			}
 		});
 	});
 }
