@@ -205,7 +205,7 @@ post "/scratches/:id/thoughts" do
 	t.mtext = params[:mtext]
 	s = Scratch.first(:id => params[:id])
 	notifications = s.notifications
-	if (s.user_id != current_user.id){
+	if s.user_id != current_user.id
 		n = Notification.new(:mtext => "<strong>Comment from: #{current_user.username} </strong>- " + params[:mtext],
 						:creator_id => current_user.id,
 						:scratch_id => s.id,
@@ -218,7 +218,7 @@ post "/scratches/:id/thoughts" do
 				({ :status => "failure", :entry => n }).to_json
 			end
 		end
-	}
+	end
 	if t.mtext.match(/@[a-zA-Z1-9]+/i)
 		users = t.mtext.scan(/@[a-zA-Z1-9]+/i)
 		users.each do |u|
