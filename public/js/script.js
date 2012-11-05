@@ -143,14 +143,17 @@ $("#leftbar, #scratchboard").on("submit", "form", function(e){
 		}
 	});
 }).on("focus", "textarea", function(){
-	var originalval = $(this).val();
-	$(this).val("");
-	$(this).on("blur", function(){
-		if ($(this).val() == ""){
-			$(".autocomplete").remove();
-			$(this).val(originalval);
-		}
-	});
+	if (!$(this).data("focused")){
+		$(this).data("focused", true);
+		var originalval = $(this).val();
+		$(this).val("");
+		$(this).on("blur", function(){
+			if ($(this).val() == ""){
+				$(".autocomplete").remove();
+				$(this).val(originalval);
+			}
+		});
+	}
 });
 
 
