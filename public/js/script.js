@@ -122,7 +122,7 @@ if ($("body").hasClass("fridge")){
 }
 
 $("#leftbar, #scratchboard").on("submit", "form", function(e){
-	if ($(this).is("#search")){
+	if ($(this).is("#search") || $.trim($(this).find("textarea").val()) == ""){
 		return;
 	}
 	e.preventDefault();
